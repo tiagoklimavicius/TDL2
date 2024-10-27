@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import DAO.ConexionBD;
+//Hay forma de importar todo esto sin hacer tanto quilombo? es con los packages creo pero no se como se hace xd
+import DAO.ConexionBD;														
 import DAO.MonedaDAOImpl;
 import Interfaces.MonedaDAO;
 import Modelo.Moneda;
