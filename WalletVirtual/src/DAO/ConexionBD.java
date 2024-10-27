@@ -55,6 +55,7 @@ public class ConexionBD {
 		sql= "CREATE TABLE IF NOT EXISTS STOCK"
 				+ " NOMENCLATURA VARCHAR(10)  PRIMARY KEY     NOT NULL, "
 				+ " CANTIDAD	REAL    NOT NULL " + ")";
+		stmt.executeUpdate(sql);
 		stmt.close();
 	}
 
