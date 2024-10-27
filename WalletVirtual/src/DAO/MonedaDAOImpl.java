@@ -13,8 +13,9 @@ public class MonedaDAOImpl implements MonedaDAO {
 	@Override
 	public void crear(Moneda moneda) {
 		String sql = "INSERT INTO MONEDA (TIPO, NOMBRE, NOMENCLATURA, VALOR_DOLAR, VOLATILIDAD) VALUES (?, ?, ?, ?, ?)";
-        try (Connection connection = ConexionBD.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+      	Connection connection = ConexionBD.getConnection();
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        	System.out.print("Ejecutando insercion en la base de datos...");
             pstmt.setString(1, moneda.getTipo());
             pstmt.setString(2, moneda.getNombre());
             pstmt.setString(3, moneda.getNomenclatura());

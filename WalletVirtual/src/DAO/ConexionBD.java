@@ -7,17 +7,19 @@ public class ConexionBD {
     private static final String BD_URL="jdbc:sqlite:walletDB.db";
     
     public static Connection getConnection() {
-    	if(c==null) {
-		    try {
-		       c = DriverManager.getConnection(BD_URL);
-		    } catch ( SQLException e ) {
-		       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		       System.exit(0);
-		    }
-		    System.out.println("Conexión realizada");
-    	}
-    	return c;
-    }
+        try {
+            // Verificar si la conexión aún está abierta
+            if (c == null || c.isClosed()) {
+                c = DriverManager.getConnection(BD_URL);
+                System.out.println("Conexión realizada");
+                creaciónDeTablasEnBD(c);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return c;
+  }
     
     public static void closeConnection() {
     	try {
@@ -31,7 +33,7 @@ public class ConexionBD {
     	}
     }
     
-    private static void creaciónDeTablasEnBD(Connection connection) throws SQLException {
+    public static void creaciónDeTablasEnBD(Connection connection) throws SQLException {
 		Statement stmt;
 		stmt = connection.createStatement();
 		String sql = "CREATE TABLE IF NOT EXISTS MONEDA " 
@@ -52,7 +54,7 @@ public class ConexionBD {
                 + " RESUMEN VARCHAR(1000)   NOT NULL, "
                 + " FECHA_HORA		DATETIME  NOT NULL " + ")";
 		stmt.executeUpdate(sql);
-		sql= "CREATE TABLE IF NOT EXISTS STOCK"
+		sql= "CREATE TABLE IF NOT EXISTS STOCK ("
 				+ " NOMENCLATURA VARCHAR(10)  PRIMARY KEY     NOT NULL, "
 				+ " CANTIDAD	REAL    NOT NULL " + ")";
 		stmt.executeUpdate(sql);
