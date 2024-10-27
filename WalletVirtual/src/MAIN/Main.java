@@ -3,6 +3,7 @@ package MAIN;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import DAO.ConexionBD;
@@ -12,6 +13,9 @@ import Modelo.Moneda;
 import DAO.ActivoDAOImpl;
 import Interfaces.ActivoDAO;
 import Modelo.Activo;
+import DAO.TransaccionDAOImpl;
+import Interfaces.TransaccionDAO;
+import Modelo.Transaccion;
 
 public class Main {
 	public static void main(String [] args) {
@@ -19,6 +23,7 @@ public class Main {
 		         Statement stmt = connection.createStatement()) {					  // El conexion realizada aparece dos veces por culpa de este try and catch.
 		        stmt.executeUpdate("DELETE FROM MONEDA");                             //Elimina los datos de moneda
 		        stmt.executeUpdate("DELETE FROM ACTIVO");							  //Elimina los datos de activo
+		        stmt.executeUpdate("DELETE FROM TRANSACCION");						//Elimina los datos de transaccion
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		    }
@@ -64,10 +69,27 @@ public class Main {
      for (Activo activo : activos2) {
          System.out.println(activo.getNomenclatura() + " - " + activo.getCantidad());
      }
+     // PARA TRANSACCIONES
+	 System.out.println("----------------------------------------------");
+	 System.out.println("TRANSACCIONES");	
+	 System.out.println("----------------------------------------------");
      
-     
-     
-     
+     TransaccionDAO tran = new TransaccionDAOImpl();
+     //Crear transacciones
+     tran.crear(new Transaccion("Compra_Exitosa", LocalDateTime.now()));
+     tran.crear(new Transaccion("Swap_Exitoso", LocalDateTime.of(2024, 10, 27, 15, 30)));
+     //Listo las transacciones
+     List<Transaccion> transacciones = tran.listar();												//No pide como tal listar las transacciones pero agregue para usar el metodo.
+     for (Transaccion transaccion : transacciones) {
+         System.out.println(transaccion.getResumen() + " - " + transaccion.getFechaHora());
+     }
+     //Actualizo una transaccion
+     tran.actualizar(new Transaccion("Compra_Exitosa", LocalDateTime.of(2024, 10, 22, 15, 30)));
+     //Listo de vuelta las transacciones para que se note el cambio
+     List<Transaccion> transacciones2 = tran.listar();
+     for (Transaccion transaccion : transacciones2) {
+         System.out.println(transaccion.getResumen() + " - " + transaccion.getFechaHora());
+     }
      
      
      
