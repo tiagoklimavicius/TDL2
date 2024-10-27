@@ -15,7 +15,6 @@ public class MonedaDAOImpl implements MonedaDAO {
 		String sql = "INSERT INTO MONEDA (TIPO, NOMBRE, NOMENCLATURA, VALOR_DOLAR, VOLATILIDAD) VALUES (?, ?, ?, ?, ?)";
       	Connection connection = ConexionBD.getConnection();
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-        	System.out.print("Ejecutando insercion en la base de datos...");
             pstmt.setString(1, moneda.getTipo());
             pstmt.setString(2, moneda.getNombre());
             pstmt.setString(3, moneda.getNomenclatura());
@@ -32,8 +31,8 @@ public class MonedaDAOImpl implements MonedaDAO {
 	public List<Moneda> listar() {
 		List<Moneda> monedas = new ArrayList<>();
         String sql = "SELECT * FROM MONEDA";
-        try (Connection connection = ConexionBD.getConnection();
-             Statement stmt = connection.createStatement();
+        Connection connection = ConexionBD.getConnection();
+        try  (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Moneda moneda = new Moneda();
@@ -54,8 +53,8 @@ public class MonedaDAOImpl implements MonedaDAO {
 	@Override
 	public void actualizar(Moneda moneda) {
 		 String sql = "UPDATE MONEDA SET TIPO=?, NOMBRE=?, VALOR_DOLAR=?, VOLATILIDAD=? WHERE NOMENCLATURA=?";
-	        try (Connection connection = ConexionBD.getConnection();
-	             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+	        Connection connection = ConexionBD.getConnection();
+	        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
 	            pstmt.setString(1, moneda.getTipo());
 	            pstmt.setString(2, moneda.getNombre());
 	            pstmt.setDouble(3, moneda.getValorDolar());

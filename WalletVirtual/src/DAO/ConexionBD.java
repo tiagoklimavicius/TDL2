@@ -12,7 +12,6 @@ public class ConexionBD {
             if (c == null || c.isClosed()) {
                 c = DriverManager.getConnection(BD_URL);
                 System.out.println("Conexión realizada");
-                creaciónDeTablasEnBD(c);
             }
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -33,7 +32,7 @@ public class ConexionBD {
     	}
     }
     
-    public static void creaciónDeTablasEnBD(Connection connection) throws SQLException {
+    private static void creaciónDeTablasEnBD(Connection connection) throws SQLException {
 		Statement stmt;
 		stmt = connection.createStatement();
 		String sql = "CREATE TABLE IF NOT EXISTS MONEDA " 
