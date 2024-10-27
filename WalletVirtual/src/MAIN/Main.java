@@ -16,6 +16,9 @@ import Modelo.Activo;
 import DAO.TransaccionDAOImpl;
 import Interfaces.TransaccionDAO;
 import Modelo.Transaccion;
+import DAO.StockDAOImpl;
+import Interfaces.StockDAO;
+import Modelo.Stock;
 
 public class Main {
 	public static void main(String [] args) {
@@ -91,8 +94,28 @@ public class Main {
          System.out.println(transaccion.getResumen() + " - " + transaccion.getFechaHora());
      }
      
+     // PARA STOCK
+	 System.out.println("----------------------------------------------");
+	 System.out.println("STOCK");	
+	 System.out.println("----------------------------------------------");
      
-     
+	 StockDAO stck = new StockDAOImpl(); 
+     // Crear stock
+     stck.crear(new Stock("ETH", 500.00));
+     stck.crear(new Stock("BTC", 200.00));
+     //Listo el stock
+     List<Stock> stocks = stck.listar();
+     for (Stock stock : stocks) {
+         System.out.println(stock.getNomenclatura() + " - " + stock.getCantidad());
+     }
+     //Actualizo un stock, BTC en este caso
+     stck.actualizar(new Stock("BTC", 250.00));
+     //Listar de vuelta para ver si se actualizo el valor
+     List<Stock> stocks2 = stck.listar();
+     for (Stock stock : stocks2) {
+         System.out.println(stock.getNomenclatura() + " - " + stock.getCantidad());
+     }
+	 
      
      //cierro la conexion
      ConexionBD.closeConnection();

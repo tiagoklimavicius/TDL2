@@ -24,6 +24,7 @@ public class ConexionBD {
     	try {
 	    	if((c!= null) && !(c.isClosed())) {
 	    		c.close();
+	    		System.out.println("Conexion cerrada");
 	    	}
     	}
     	catch (SQLException e) {
