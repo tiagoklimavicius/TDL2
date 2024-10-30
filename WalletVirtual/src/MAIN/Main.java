@@ -18,34 +18,26 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         MonedaDAO monedaDAO = new MonedaDAOImpl();
         ActivoDAO activoDAO = new ActivoDAOImpl();
-        StockDAO stockDAO = new StockDAOImpl();
         TransaccionDAO transaccionDAO = new TransaccionDAOImpl();
 
         boolean continuar = true;
         
-        try (Connection connection = ConexionBD.getConnection();                      //Esto esta para que se elimine la tabla asi se cargan los datos en cada prueba
+       try (Connection connection = ConexionBD.getConnection();                      //Esto esta para que se elimine la tabla asi se cargan los datos en cada prueba
 		         Statement stmt = connection.createStatement()) {					  // El conexion realizada aparece dos veces por culpa de este try and catch.
 		        stmt.executeUpdate("DELETE FROM MONEDA");                             //Elimina los datos de moneda
 		        stmt.executeUpdate("DELETE FROM ACTIVO");							  //Elimina los datos de activo
 		        stmt.executeUpdate("DELETE FROM TRANSACCION");						//Elimina los datos de transaccion
-		        stmt.executeUpdate("DELETE FROM STOCK");							//Elimina los datos de stock
 		    } catch (SQLException e) {
 		        e.printStackTrace();
-		    }
-
+		    }                          	
+       System.out.println("Bienvenido al sistema de Billetera Virtual");
         while (continuar) {
-            System.out.println("Bienvenido al sistema de Billetera Virtual");
             System.out.println("Seleccione una opción:");
-            System.out.println("1. Crear Moneda");
-            System.out.println("2. Listar Monedas");
-            System.out.println("3. Generar Stock Aleatorio");
-            System.out.println("4. Listar Stock");
-            System.out.println("5. Generar Mis Activos");
-            System.out.println("6. Listar Mis Activos");
-            System.out.println("7. Simular Compra de Criptomoneda");
-            System.out.println("8. Simular Swap de Criptomoneda");
-            System.out.println("9. Salir");
-            
+            System.out.println("-----------------------------------------------------------------------------");
+            System.out.println("| 1. Crear Moneda            |  4. Listar Stock        |  7. Simular Compra |");
+            System.out.println("| 2. Listar Monedas          |  5. Generar Mis Activos |  8. Simular Swap   |");
+            System.out.println("| 3. Generar Stock Aleatorio |  6. Listar Mis Activos  |  9. Salir          |");
+            System.out.println("-----------------------------------------------------------------------------");
             int opcion = scanner.nextInt();
 
             switch (opcion) {
@@ -106,12 +98,14 @@ public class Main {
         double valorDolar = scanner.nextDouble();
         System.out.println("Ingrese volatilidad:");
         double volatilidad = scanner.nextDouble();
+        System.out.println("Ingrese stock:");
+        double stock = scanner.nextDouble();
 
         // Confirmación del usuario
         System.out.println("¿Confirma los datos? (S/N)");
         String confirmacion = scanner.next().toUpperCase();
         if (confirmacion.equals("S")) {
-            monedaDAO.crear(new Moneda(tipo, nombre, nomenclatura, valorDolar, volatilidad));
+            monedaDAO.crear(new Moneda(tipo, nombre, nomenclatura, valorDolar, volatilidad, stock));
             System.out.println("Moneda creada exitosamente.");
         }
     }
@@ -130,7 +124,7 @@ public class Main {
         Random random = new Random();
         for (Moneda moneda : monedas) {
             double nuevoStock = 1000 * random.nextDouble(); // Generar stock aleatorio
-            monedaDAO.actualizar(new Moneda(moneda.getTipo(), moneda.getNombre(), moneda.getNomenclatura(), moneda.getValorDolar(), nuevoStock));
+            monedaDAO.actualizar(new Moneda(moneda.getTipo(), moneda.getNombre(), moneda.getNomenclatura(), moneda.getValorDolar(), moneda.getVolatilidad(), nuevoStock));
             System.out.println("Nuevo stock para " + moneda.getNomenclatura() + ": " + nuevoStock);
         }
     }
