@@ -19,36 +19,36 @@ public class Main {
         MonedaDAO monedaDAO = new MonedaDAOImpl();
         ActivoDAO activoDAO = new ActivoDAOImpl();
         TransaccionDAO transaccionDAO = new TransaccionDAOImpl();
-
+        Gestor gestor = new Gestor();
         boolean continuar = true;
         
-       try (Connection connection = ConexionBD.getConnection();                      //Esto esta para que se elimine la tabla asi se cargan los datos en cada prueba
+ /*      try (Connection connection = ConexionBD.getConnection();                      //Esto esta para que se elimine la tabla asi se cargan los datos en cada prueba
 		         Statement stmt = connection.createStatement()) {					  // El conexion realizada aparece dos veces por culpa de este try and catch.
 		        stmt.executeUpdate("DELETE FROM MONEDA");                             //Elimina los datos de moneda
 		        stmt.executeUpdate("DELETE FROM ACTIVO");							  //Elimina los datos de activo
 		        stmt.executeUpdate("DELETE FROM TRANSACCION");						//Elimina los datos de transaccion
 		    } catch (SQLException e) {
 		        e.printStackTrace();
-		    }                          	
+		    }                          	   */
        System.out.println("Bienvenido al sistema de Billetera Virtual");
         while (continuar) {
             System.out.println("Seleccione una opción:");
-            System.out.println("-----------------------------------------------------------------------------");
-            System.out.println("| 1. Crear Moneda            |  4. Listar Stock        |  7. Simular Compra |");
-            System.out.println("| 2. Listar Monedas          |  5. Generar Mis Activos |  8. Simular Swap   |");
-            System.out.println("| 3. Generar Stock Aleatorio |  6. Listar Mis Activos  |  9. Salir          |");
-            System.out.println("-----------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("| 1. Crear Moneda   |  4. Listar Stock        |  7. Simular Compra |");
+            System.out.println("| 2. Listar Monedas |  5. Generar Mis Activos |  8. Simular Swap   |");
+            System.out.println("| 3. Generar Stock  |  6. Listar Mis Activos  |  9. Salir          |");
+            System.out.println("--------------------------------------------------------------------");
             int opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1: // Crear Moneda
-                    crearMoneda(scanner, monedaDAO);
+                    gestor.crearMoneda();
                     break;
                 case 2: // Listar Monedas
                     listarMonedas(monedaDAO);
                     break;
                 case 3: // Generar Stock Aleatorio
-                    generarStockAleatorio(monedaDAO);							//aca tambien deberia pasarse stockDAO
+                    gestor.generarStock();							//aca tambien deberia pasarse stockDAO
                     break;
                 case 4: // Listar Stock
                 	System.out.println("Listado de stock");
@@ -82,33 +82,6 @@ public class Main {
     }
 
     // Métodos para cada opción del menú
-    private static void crearMoneda(Scanner scanner, MonedaDAO monedaDAO) {
-        System.out.println("Ingrese el tipo de moneda (C para Cripto o F para FIAT):");
-        String tipo = scanner.next().toUpperCase();
-        while (!tipo.equals("C") && !tipo.equals("F")) {
-            System.out.println("Tipo inválido. Ingrese 'C' para Cripto o 'F' para FIAT:");
-            tipo = scanner.next().toUpperCase();
-        }
-
-        System.out.println("Ingrese el nombre de la moneda:");
-        String nombre = scanner.next();
-        System.out.println("Ingrese la nomenclatura de la moneda:");
-        String nomenclatura = scanner.next().toUpperCase();
-        System.out.println("Ingrese el valor en dólares:");
-        double valorDolar = scanner.nextDouble();
-        System.out.println("Ingrese volatilidad:");
-        double volatilidad = scanner.nextDouble();
-        System.out.println("Ingrese stock:");
-        double stock = scanner.nextDouble();
-
-        // Confirmación del usuario
-        System.out.println("¿Confirma los datos? (S/N)");
-        String confirmacion = scanner.next().toUpperCase();
-        if (confirmacion.equals("S")) {
-            monedaDAO.crear(new Moneda(tipo, nombre, nomenclatura, valorDolar, volatilidad, stock));
-            System.out.println("Moneda creada exitosamente.");
-        }
-    }
 
     private static void listarMonedas(MonedaDAO monedaDAO) {
         List<Moneda> monedas = monedaDAO.listar();
@@ -119,15 +92,7 @@ public class Main {
         }
     }
 
-    private static void generarStockAleatorio(MonedaDAO monedaDAO) {
-        List<Moneda> monedas = monedaDAO.listar();
-        Random random = new Random();
-        for (Moneda moneda : monedas) {
-            double nuevoStock = 1000 * random.nextDouble(); // Generar stock aleatorio
-            monedaDAO.actualizar(new Moneda(moneda.getTipo(), moneda.getNombre(), moneda.getNomenclatura(), moneda.getValorDolar(), moneda.getVolatilidad(), nuevoStock));
-            System.out.println("Nuevo stock para " + moneda.getNomenclatura() + ": " + nuevoStock);
-        }
-    }
+    
 
  //   private static void listarStock(MonedaDAO monedaDAO) {
  //       List<Moneda> monedas = monedaDAO.listar();
