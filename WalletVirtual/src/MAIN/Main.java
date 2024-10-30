@@ -48,15 +48,13 @@ public class Main {
                     gestor.listarMonedas();
                     break;
                 case 3: // Generar Stock 
-                    gestor.generarStock();							//aca tambien deberia pasarse stockDAO
+                    gestor.generarStock();							
                     break;
                 case 4: // Listar Stock
-                	gestor.listarStock();
-      //              listarStock(monedaDAO);										//listar stock deberia tener otro parametro ya que las monedas no tienen el stock, a menos que les demos el stock a las monedas
+                	gestor.listarStock();								
                     break;
                 case 5: // Generar Mis Activos
-                	System.out.println("Generar activos");
-                    //generarMisActivos(scanner, monedaDAO, activoDAO);
+                	gestor.generarActivo();
                     break;
                 case 6: // Listar Mis Activos
                     listarMisActivos(activoDAO);

@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import DAO.*;
-import Interfaces.MonedaDAO;
-import Modelo.Moneda;
+import Modelo.*;
 
 public class Gestor {
 	
-	private MonedaDAO monedaDAO = new MonedaDAOImpl();
+	private ActivoDAOImpl activoDAO = new ActivoDAOImpl();
+	private MonedaDAOImpl monedaDAO = new MonedaDAOImpl();
 	Scanner scanner = new Scanner(System.in);
 	public void crearMoneda() {
 		System.out.println("Ingrese el tipo de moneda (C para Cripto o F para FIAT):");
@@ -46,9 +46,11 @@ public class Gestor {
         System.out.println("¿Confirma los datos? (S/N)");
         String confirmacion = scanner.next().toUpperCase();
         if (confirmacion.equals("S")) {
-        	
             monedaDAO.crear(new Moneda(tipo, nombre, nomenclatura, valorDolar, volatilidad, stock));
             System.out.println("Moneda creada exitosamente.");
+        }
+        else {
+        	System.out.println("Operacion cancelada.");
         }
     }
 	
@@ -82,6 +84,27 @@ public class Gestor {
 			System.out.println(moneda.getNomenclatura() + " - Stock: " + moneda.getStock());
 		}
 	}	
+	
+	public void generarActivo() {
+		System.out.println("Ingrese cantidad:");
+		double cantidad = scanner.nextDouble();
+		System.out.println("Ingrese nomenclatura: ");
+		String nomenclatura = scanner.next().toUpperCase();
+		
+		if (!activoDAO.existeNomenclatura(nomenclatura)) {
+            System.out.println("Error: La nomenclatura ingresada no existe.");
+            return;
+        }
+		System.out.println("¿Confirma los datos? (S/N)");
+        String confirmacion = scanner.next().toUpperCase();
+        if (confirmacion.equals("S")) {
+        	activoDAO.crear(new Activo(nomenclatura, cantidad));
+        	System.out.println("Activo creado exitosamente.");
+        }
+        else {
+        	System.out.println("Operacion cancelada.");
+        }
+	}
 }
 
 	
