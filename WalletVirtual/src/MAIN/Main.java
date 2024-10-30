@@ -22,13 +22,13 @@ public class Main {
         Gestor gestor = new Gestor();
         boolean continuar = true;
         
- /*      try (Connection connection = ConexionBD.getConnection();                      //Esto esta para que se elimine la tabla asi se cargan los datos en cada prueba
+  /*    try (Connection connection = ConexionBD.getConnection();                      //Esto esta para que se elimine la tabla asi se cargan los datos en cada prueba
 		         Statement stmt = connection.createStatement()) {					  // El conexion realizada aparece dos veces por culpa de este try and catch.
 		        stmt.executeUpdate("DELETE FROM MONEDA");                             //Elimina los datos de moneda
 		        stmt.executeUpdate("DELETE FROM ACTIVO");							  //Elimina los datos de activo
 		        stmt.executeUpdate("DELETE FROM TRANSACCION");						//Elimina los datos de transaccion
 		    } catch (SQLException e) {
-		        e.printStackTrace();
+		        e.printStackTrace();		
 		    }                          	   */
        System.out.println("Bienvenido al sistema de Billetera Virtual");
         while (continuar) {
@@ -45,13 +45,13 @@ public class Main {
                     gestor.crearMoneda();
                     break;
                 case 2: // Listar Monedas
-                    listarMonedas(monedaDAO);
+                    gestor.listarMonedas();
                     break;
-                case 3: // Generar Stock Aleatorio
+                case 3: // Generar Stock 
                     gestor.generarStock();							//aca tambien deberia pasarse stockDAO
                     break;
                 case 4: // Listar Stock
-                	System.out.println("Listado de stock");
+                	gestor.listarStock();
       //              listarStock(monedaDAO);										//listar stock deberia tener otro parametro ya que las monedas no tienen el stock, a menos que les demos el stock a las monedas
                     break;
                 case 5: // Generar Mis Activos
@@ -81,27 +81,12 @@ public class Main {
         System.out.println("Saliendo del sistema...");
     }
 
-    // Métodos para cada opción del menú
 
-    private static void listarMonedas(MonedaDAO monedaDAO) {
-        List<Moneda> monedas = monedaDAO.listar();
-        monedas.sort((m1, m2) -> Double.compare(m2.getValorDolar(), m1.getValorDolar())); // Ordenar por valor en dólares
-        System.out.println("Listado de Monedas (ordenadas por valor en dólares):");
-        for (Moneda moneda : monedas) {
-            System.out.println(moneda.getNomenclatura() + " - " + moneda.getNombre() + " - $" + moneda.getValorDolar());
-        }
-    }
+ 
 
     
 
- //   private static void listarStock(MonedaDAO monedaDAO) {
- //       List<Moneda> monedas = monedaDAO.listar();
-  //      monedas.sort((m1, m2) -> Double.compare(m2.getStock(), m1.getStock())); // Ordenar por stock
- //       System.out.println("Listado de Stock:");
- //       for (Moneda moneda : monedas) {
- //           System.out.println(moneda.getNomenclatura() + " - Stock: " + moneda.getStock());
- //       }
-  //  }
+ 
 
   //  private static void generarMisActivos(Scanner scanner, MonedaDAO monedaDAO, ActivoDAO activoDAO) {
   //      System.out.println("Ingrese la nomenclatura de la moneda:");

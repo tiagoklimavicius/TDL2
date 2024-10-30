@@ -29,10 +29,19 @@ public class Gestor {
         System.out.println("Ingrese volatilidad:");
         double volatilidad = scanner.nextDouble();
         scanner.nextLine();
-        System.out.println("Ingrese stock:");
-        double stock = scanner.nextDouble();
-        scanner.nextLine();
-
+        Double stock = 0.00;
+        if (tipo.equals("F")) {
+        	System.out.println("Ingrese stock (puede dejar en blanco si no aplica):");
+        	String inStock = scanner.nextLine();
+        	if(!inStock.isEmpty()) {
+        		stock = Double.valueOf(inStock);
+        	}
+        }
+        else {
+        	System.out.println("Ingrese stock:");
+        	stock = scanner.nextDouble();
+        	scanner.nextLine();
+        }
         // Confirmación del usuario
         System.out.println("¿Confirma los datos? (S/N)");
         String confirmacion = scanner.next().toUpperCase();
@@ -43,14 +52,37 @@ public class Gestor {
         }
     }
 	
+	  public void listarMonedas( ) {
+	        List<Moneda> monedas = monedaDAO.listar();
+	        monedas.sort((m1, m2) -> Double.compare(m2.getValorDolar(), m1.getValorDolar())); // Ordenar por valor en dólares
+	        System.out.println("Listado de Monedas (ordenadas por valor en dólares):");
+	        for (Moneda moneda : monedas) {
+	            System.out.println(moneda.getNomenclatura() + " - " + moneda.getNombre() + " - $" + moneda.getValorDolar());
+	        }
+	    }
+	
 	public void generarStock() {
 		List<Moneda> monedas = monedaDAO.listar(); // Recupera todas las monedas
         Random random = new Random();
         for (Moneda moneda : monedas) {
-            double stockAleatorio = 10 + (500 - 10) * random.nextDouble(); // Genera stock aleatorio
-            moneda.setStock(stockAleatorio); // Asigna el stock aleatorio a la moneda
-            monedaDAO.actualizar(moneda); // Actualiza la moneda en la base de datos
+        	if(moneda.getTipo().equals("C")) {
+        		double stockAleatorio = 10 + (500 - 10) * random.nextDouble(); // Genera stock aleatorio
+        		moneda.setStock(stockAleatorio); // Asigna el stock aleatorio a la moneda
+        		monedaDAO.actualizar(moneda); // Actualiza la moneda en la base de datos
+        	}
         }
         System.out.println("Stock generado aleatoriamente");
     }
+	
+	public void listarStock() {
+		List<Moneda> monedas = monedaDAO.listar();
+		monedas.sort((m1, m2) -> Double.compare(m2.getStock(), m1.getStock())); // Ordenar por stock
+		System.out.println("Listado de Stock:");
+		for (Moneda moneda : monedas) {
+			System.out.println(moneda.getNomenclatura() + " - Stock: " + moneda.getStock());
+		}
+	}	
 }
+
+	
+	
