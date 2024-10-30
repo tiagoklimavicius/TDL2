@@ -4,14 +4,22 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import DAO.*;
-import Interfaces.ActivoDAO;
 import Modelo.*;
 
 public class Gestor {
+	private ActivoDAOImpl activoDAO;
+	private MonedaDAOImpl monedaDAO ;
+	private TransaccionDAOImpl transaccionDAO;
+	private Scanner scanner;
 	
-	private ActivoDAOImpl activoDAO = new ActivoDAOImpl();
-	private MonedaDAOImpl monedaDAO = new MonedaDAOImpl();
-	Scanner scanner = new Scanner(System.in);
+	public Gestor() {
+		this.monedaDAO = new MonedaDAOImpl();
+		this.activoDAO = new ActivoDAOImpl();
+		this.transaccionDAO = new TransaccionDAOImpl();
+		this.scanner = new Scanner(System.in);
+	}
+	
+	
 	public void crearMoneda() {
 		System.out.println("Ingrese el tipo de moneda (C para Cripto o F para FIAT):");
         String tipo = scanner.next().toUpperCase();
