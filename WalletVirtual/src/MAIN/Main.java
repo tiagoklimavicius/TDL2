@@ -57,7 +57,7 @@ public class Main {
                 	gestor.generarActivo();
                     break;
                 case 6: // Listar Mis Activos
-                    listarMisActivos(activoDAO);
+                    gestor.listarActivos();
                     break;
                 case 7: // Simular Compra de Criptomoneda
                     simularCompra(scanner, monedaDAO, activoDAO, transaccionDAO);
@@ -77,36 +77,6 @@ public class Main {
         scanner.close();
         ConexionBD.closeConnection(); // Cerrar la conexión al final
         System.out.println("Saliendo del sistema...");
-    }
-
-
- 
-
-    
-
- 
-
-  //  private static void generarMisActivos(Scanner scanner, MonedaDAO monedaDAO, ActivoDAO activoDAO) {
-  //      System.out.println("Ingrese la nomenclatura de la moneda:");
-  //      String nomenclatura = scanner.next().toUpperCase();
-   //     Moneda moneda = monedaDAO.obtenerPorClave(nomenclatura);
-   //     if (moneda != null) {
-    //        System.out.println("Ingrese la cantidad:");
-     //       double cantidad = scanner.nextDouble();
-     //       activoDAO.crear(new Activo(nomenclatura, cantidad));
-     //       System.out.println("Activo creado.");
-     //   } else {
-     //       System.out.println("Moneda no encontrada.");
-     //   }
-  //  }
-
-    private static void listarMisActivos(ActivoDAO activoDAO) {
-        List<Activo> activos = activoDAO.listar();
-        activos.sort((a1, a2) -> Double.compare(a2.getCantidad(), a1.getCantidad())); // Ordenar por cantidad
-        System.out.println("Listado de Activos:");
-        for (Activo activo : activos) {
-            System.out.println(activo.getNomenclatura() + " - Cantidad: " + activo.getCantidad());
-        }
     }
 
     private static void simularCompra(Scanner scanner, MonedaDAO monedaDAO, ActivoDAO activoDAO, TransaccionDAO transaccionDAO) {

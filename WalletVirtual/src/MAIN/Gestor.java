@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import DAO.*;
+import Interfaces.ActivoDAO;
 import Modelo.*;
 
 public class Gestor {
@@ -105,6 +106,15 @@ public class Gestor {
         	System.out.println("Operacion cancelada.");
         }
 	}
+	
+	public void listarActivos( ) {
+        List<Activo> activos = activoDAO.listar();
+        activos.sort((a1, a2) -> Double.compare(a2.getCantidad(), a1.getCantidad())); // Ordenar por cantidad
+        System.out.println("Listado de Activos:");
+        for (Activo activo : activos) {
+            System.out.println(activo.getNomenclatura() + " - Cantidad: " + activo.getCantidad());
+        }
+    }
 }
 
 	
