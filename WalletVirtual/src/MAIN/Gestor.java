@@ -110,17 +110,29 @@ public class Gestor {
 		double cantidad = scanner.nextDouble();
 		System.out.println("Ingrese nomenclatura: ");
 		String nomenclatura = scanner.next().toUpperCase();
-		
-		if (activoDAO.obtener(nomenclatura) == null) {
+		if (monedaDAO.obtener(nomenclatura) == null) {
             System.out.println("Error: La nomenclatura ingresada no existe.");
             return;
         }
 		System.out.println("¿Confirma los datos? (S/N)");
         String confirmacion = scanner.next().toUpperCase();
         if (confirmacion.equals("S")) {
-        	activoDAO.crear(new Activo(nomenclatura, cantidad));
-        	System.out.println("Activo creado exitosamente.");
+        	//me fijo si ya poseo el activo y si no lo tengo lo creo
+        	Activo act = activoDAO.obtener(nomenclatura);
+        	if(act == null) {
+        		
+        		//instancio el nuevo activo y lo agrego a la tabla
+        		
+        		activoDAO.crear(new Activo(nomenclatura, cantidad));
+        		System.out.println("Activo creado exitosamente.");
+        	}
+        	else {
+        		act.setCantidad(act.getCantidad() + cantidad);	//actualizo la cantidad del activo
+        		activoDAO.actualizar(act);
+        		System.out.println("Activo actualizado correctamente.");
+        	}
         }
+        	
         else {
         	System.out.println("Operacion cancelada.");
         }
@@ -196,7 +208,7 @@ public class Gestor {
 							String resumen = "Operacion: Compra - Moneda origen: "+ nomenclaturaF +" - Moneda destino: "+ nomenclaturaC+" - Cantidad: "+cantidad;
 							transaccionDAO.crear(new Transaccion(resumen, LocalDateTime.now()));				//Creo la transaccion en la DB
 		        	
-							System.out.println("Operación realizada efectivamente.");
+							System.out.println("Operación realizada efectivamente. Se han acreditado "+ equivalente+" "+nomenclaturaC+" a su cuenta.");
 						}
 						else {
 							System.out.println("Operación cancelada.");
