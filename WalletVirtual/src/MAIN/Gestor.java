@@ -151,7 +151,7 @@ public class Gestor {
 	}
 	
 	public void simularCompra() {
-		System.out.println("||     COMPRA DE CRIPTOMONEDA     ||");
+		System.out.println("||     OPERACIÓN DE COMPRA     ||");
 		System.out.println("Ingrese nomenclatura de la criptomoneda a comprar: ");
 		String nomenclaturaC = scanner.next().toUpperCase();
 		System.out.println("Ingrese nomenclatura de la moneda FIAT: ");
@@ -180,7 +180,7 @@ public class Gestor {
 						//para este momento el stock es suficiente para poder efectuar la compra
 						//primero reviso si la criptomoneda ya es un activo para asi variar sus valores
 				
-						System.out.println("Hay stock suficiente para realizar la compra.");
+						System.out.println("Hay stock suficiente para realizar la compra. Serian "+ equivalente+" "+nomenclaturaC);
 						System.out.println("¿Confirma la operación? (S/N)");
 						String confirmacion = scanner.next().toUpperCase();
 						if (confirmacion.equals("S")) {
@@ -205,7 +205,7 @@ public class Gestor {
 								activoDAO.actualizar(actF);											//actualizo en la tabla de activos
 							}
 							
-							String resumen = "Operacion: Compra - Moneda origen: "+ nomenclaturaF +" - Moneda destino: "+ nomenclaturaC+" - Cantidad: "+cantidad;
+							String resumen = "Operacion: COMPRA - Moneda origen: "+ nomenclaturaF +" - Moneda destino: "+ nomenclaturaC+" - Cantidad: "+cantidad;
 							transaccionDAO.crear(new Transaccion(resumen, LocalDateTime.now()));				//Creo la transaccion en la DB
 		        	
 							System.out.println("Operación realizada efectivamente. Se han acreditado "+ equivalente+" "+nomenclaturaC+" a su cuenta.");
@@ -231,6 +231,84 @@ public class Gestor {
 			System.out.println("Ocurrió un error. Revise las monedas ingresadas.");
 		}	
 	}	
+	
+	public void simularSwap() {
+		System.out.println("||     OPERACIÓN DE SWAP     ||");
+		System.out.println("Ingrese nomenclatura de la criptomoneda a convertir: ");
+		String nomenclaturaOrigen = scanner.next().toUpperCase();
+		System.out.println("Ingrese cantidad a convertir: ");
+		double cantidad = scanner.nextDouble();
+		System.out.println("Ingrese nomenclatura de la criptomoneda esperada: ");
+		String nomenclaturaDestino = scanner.next().toUpperCase();
+		//consulto si existen ambas monedas
+		Moneda criptoOrigen = monedaDAO.obtener(nomenclaturaOrigen);
+		Moneda criptoDestino = monedaDAO.obtener(nomenclaturaDestino);
+		if(criptoOrigen != null && criptoDestino != null) {				//si ambas monedas existen en la billetera continuo.
+			
+			//calculo la cantidad de la criptomoneda que voy a necesitar
+			
+			double equivalente = (criptoOrigen.getValorDolar() * cantidad) / criptoDestino.getValorDolar();		//calculo el equivalente en la criptoDestino
+			
+			Activo activoOrigen = activoDAO.obtener(nomenclaturaOrigen);		//obtengo los activos a utilizar en la operacion.
+			Activo activoDestino = activoDAO.obtener(nomenclaturaDestino);
+			
+			if(activoOrigen != null && activoDestino != null){		//reviso que ambos activos existan en la cuenta del usuario.
+				
+				if(activoOrigen.getCantidad() >= cantidad) {        //reviso que el usuario posee la cantidad indicada a convertir del activo
+					
+					//ahora con el equivalente consulto si el stock de la cripto destino es suficiente para realizar el swap
+					
+					if(criptoDestino.getStock() >= equivalente) {
+				
+						//para este momento el stock es suficiente para poder efectuar el swap
+				
+						System.out.println("Hay stock suficiente para realizar el swap. "+cantidad+" "+nomenclaturaOrigen+" a "+equivalente+" "+nomenclaturaDestino);
+						System.out.println("¿Confirma la operación? (S/N)");
+						String confirmacion = scanner.next().toUpperCase();
+						if (confirmacion.equals("S")) {
+							
+							//para este momento tengo todo lo requerido para poder efectuar el swap
+							
+							activoOrigen.setCantidad(activoOrigen.getCantidad() - cantidad);		//actualizo la cantidad del activo origen decrementandole lo que intercambiamos
+							activoDAO.actualizar(activoOrigen);										//actualizo la tabla
+							activoDestino.setCantidad(activoDestino.getCantidad() + equivalente);    //actualizo la cantidad de del activo destino incrementandola con el equivalente
+							activoDAO.actualizar(activoDestino);									//actualizo en la tabla el valor
+							
+							
+							//los activos del usuario ya se actualizaron ahora resta actualizar el stock de la billetera
+							
+							criptoOrigen.setStock(criptoOrigen.getStock() + cantidad);				//agrego el stock que recupere al hacer el swap
+							monedaDAO.actualizar(criptoOrigen);
+							criptoDestino.setStock(criptoDestino.getStock() - equivalente);  		//decremento el stock de la moneda que convertí
+							monedaDAO.actualizar(criptoDestino);
+							
+							//valores de moneda y activos actualizados en la DB ahora queda la transaccion
+							
+							String resumen = "Operacion: SWAP   - Moneda origen: "+ nomenclaturaOrigen +" - Moneda destino: "+ nomenclaturaDestino+" - Cantidad: "+cantidad;
+							transaccionDAO.crear(new Transaccion(resumen, LocalDateTime.now()));				//Creo la transaccion en la DB
+							
+							System.out.println("Operación realizada efectivamente. Se han convertido "+cantidad+" "+nomenclaturaOrigen+" a "+equivalente+" "+nomenclaturaDestino);	
+						}
+						else {
+							System.out.println("Operación cancelada.");
+						}
+					}
+					else {
+						System.out.println("Ocurrió un error. No hay suficiente stock de la criptomoneda destino.");
+					}
+				}
+				else {
+					System.out.println("Ocurrió un error. No posee suficiente cantidad de la criptomoneda a convertir.");
+				}
+			}
+			else {
+				System.out.print("Ocurrió un error. No posee todos los activos a utilizar.");
+			}
+		}
+		else {
+			System.out.print("Ocurrió un error. Revise las monedas ingresadas");
+		}
+	}
 }
 
 	

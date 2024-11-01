@@ -64,7 +64,7 @@ public class Main {
                     gestor.simularCompra();
                     break;
                 case 8: // Simular Swap de Criptomoneda
-                    simularSwap(scanner, monedaDAO, activoDAO, transaccionDAO);
+                    gestor.simularSwap();
                     break;
                 case 9: // Salir
                     continuar = false;
