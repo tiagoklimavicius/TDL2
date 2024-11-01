@@ -38,7 +38,7 @@ public class Gestor {
         System.out.println("Ingrese el valor en dólares:");
         double valorDolar = scanner.nextDouble();
         scanner.nextLine();
-        System.out.println("Ingrese volatilidad:");
+        System.out.println("Ingrese volatilidad:    (Ejemplo: 0,00)");
         double volatilidad = scanner.nextDouble();
         scanner.nextLine();
         Double stock = 0.00;
@@ -58,8 +58,13 @@ public class Gestor {
         System.out.println("¿Confirma los datos? (S/N)");
         String confirmacion = scanner.next().toUpperCase();
         if (confirmacion.equals("S")) {
-            monedaDAO.crear(new Moneda(tipo, nombre, nomenclatura, valorDolar, volatilidad, stock));
-            System.out.println("Moneda creada exitosamente.");
+        	if(monedaDAO.obtener(nomenclatura) == null) {
+        		monedaDAO.crear(new Moneda(tipo, nombre, nomenclatura, valorDolar, volatilidad, stock));
+        		System.out.println("Moneda creada exitosamente.");
+        	}
+        	else {
+        		System.out.println("Ocurrió un error. La moneda ya existe en el sistema.");
+        	}
         }
         else {
         	System.out.println("Operacion cancelada.");
@@ -69,13 +74,13 @@ public class Gestor {
 	public void listarMonedas(boolean ordenarPorNomenclatura) {
 	    List<Moneda> monedas = monedaDAO.listar();
 	    if (ordenarPorNomenclatura) {
-	        monedas.sort(new MonedaComparatorPorNomenclatura());
+	    	monedas.sort(new MonedaComparatorPorNomenclatura());
 	    } else {
-	        Collections.sort(monedas); // Usa compareTo de Moneda
-	    }
-	    for (Moneda moneda : monedas) {
-	        System.out.println(moneda.toString());
-	    }
+	   		Collections.sort(monedas); // Usa compareTo de Moneda
+	   	}
+	   	for (Moneda moneda : monedas) {
+	   		System.out.println(moneda.toString());
+	   }
 	}
 
 	
@@ -84,8 +89,8 @@ public class Gestor {
         Random random = new Random();
         for (Moneda moneda : monedas) {
         	if(moneda.getTipo().equals("C")) {
-        		double stockAleatorio = 10 + (500 - 10) * random.nextDouble(); // Genera stock aleatorio
-        		moneda.setStock(stockAleatorio); // Asigna el stock aleatorio a la moneda
+        		double stockAleatorio = 10 + (5000 - 10) * random.nextDouble(); // Genera stock aleatorio           
+        		moneda.setStock(moneda.getStock() + stockAleatorio); // Asigna el stock aleatorio a la moneda
         		monedaDAO.actualizar(moneda); // Actualiza la moneda en la base de datos
         	}
         }
@@ -100,7 +105,7 @@ public class Gestor {
 	        monedas.sort(new MonedaComparatorPorStock());
 	    }
 	    for (Moneda moneda : monedas) {
-	        System.out.println(moneda.getNombre() + ": " + moneda.getStock());
+	        System.out.println(moneda.getNomenclatura() +" "+ moneda.getNombre() + ": " + moneda.getStock());
 	    }
 	}
 

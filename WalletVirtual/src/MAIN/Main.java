@@ -1,19 +1,16 @@
 package MAIN;
 
-import DAO.*;
-import Modelo.*;
-import Interfaces.*;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import DAO.ConexionBD;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        MonedaDAO monedaDAO = new MonedaDAOImpl();
-        ActivoDAO activoDAO = new ActivoDAOImpl();
-        TransaccionDAO transaccionDAO = new TransaccionDAOImpl();
         Gestor gestor = new Gestor();
         boolean continuar = true;
 
@@ -105,9 +102,5 @@ public class Main {
         int criterio = scanner.nextInt();
         boolean ordenarPorNomenclatura = (criterio == 2);
         gestor.listarActivos(ordenarPorNomenclatura);
-    }
-
-    private static void simularSwap(Scanner scanner, MonedaDAO monedaDAO, ActivoDAO activoDAO, TransaccionDAO transaccionDAO) {
-        // Implementar lógica para simular swap de criptomonedas
     }
 }

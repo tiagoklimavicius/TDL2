@@ -72,13 +72,13 @@ public class MonedaDAOImpl implements MonedaDAO {
 	}
 	
 	@Override
-	public Moneda obtener(String clave) {
+	public Moneda obtener(String nomenclatura) {
 	    String sql = "SELECT * FROM MONEDA WHERE NOMENCLATURA = ?";
 	    Connection connection = ConexionBD.getConnection();
 	    Moneda moneda = null;
 	    
 	    try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-	        pstmt.setString(1, clave);
+	        pstmt.setString(1, nomenclatura);
 	        try (ResultSet rs = pstmt.executeQuery()) {
 	            if (rs.next()) {
 	                moneda = new Moneda();
