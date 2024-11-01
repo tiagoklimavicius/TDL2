@@ -32,6 +32,7 @@ public class Main {
         System.out.println("Bienvenido al sistema de Billetera Virtual");
 
         while (continuar) {
+        	System.out.println();
             System.out.println("Seleccione una opción:");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("| 1. Crear Moneda   |  4. Listar Stock        |  7. Simular Compra |");
@@ -60,7 +61,7 @@ public class Main {
                     listarActivosConOpcion(scanner, gestor);
                     break;
                 case 7: // Simular Compra de Criptomoneda
-                    simularCompra(scanner, monedaDAO, activoDAO, transaccionDAO);
+                    gestor.simularCompra();
                     break;
                 case 8: // Simular Swap de Criptomoneda
                     simularSwap(scanner, monedaDAO, activoDAO, transaccionDAO);
@@ -104,10 +105,6 @@ public class Main {
         int criterio = scanner.nextInt();
         boolean ordenarPorNomenclatura = (criterio == 2);
         gestor.listarActivos(ordenarPorNomenclatura);
-    }
-
-    private static void simularCompra(Scanner scanner, MonedaDAO monedaDAO, ActivoDAO activoDAO, TransaccionDAO transaccionDAO) {
-        // Implementar lógica para simular compra de criptomoneda
     }
 
     private static void simularSwap(Scanner scanner, MonedaDAO monedaDAO, ActivoDAO activoDAO, TransaccionDAO transaccionDAO) {
