@@ -3,6 +3,7 @@ package Modelo;
 import java.time.LocalDateTime;
 
 public class Transaccion {
+	private int ID;
     private String resumen;           // string con la data del resumen
     private LocalDateTime fechaHora;  // FECHA
     // Operacion
@@ -14,12 +15,22 @@ public class Transaccion {
     	
     }
     
-    public Transaccion(String resumen, LocalDateTime fechaHora) {
+    public Transaccion(int ID, String resumen, LocalDateTime fechaHora) {
+    	this.ID=ID;
     	this.resumen = resumen;
     	this.fechaHora = fechaHora;
     }
 
-    // Getters y setters
+	// Getters y setters
+    
+    public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
     public String getResumen() {
         return resumen;
     }

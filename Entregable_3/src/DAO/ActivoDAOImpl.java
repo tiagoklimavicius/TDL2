@@ -7,7 +7,7 @@ import java.util.List;
 import Interfaces.ActivoDAO;
 import Modelo.Activo;
 
-public class ActivoDAOImpl implements ActivoDAO {
+/* public class ActivoDAOImpl implements ActivoDAO {
 
     @Override
     public void crear(Activo activo) {
@@ -80,4 +80,4 @@ public class ActivoDAOImpl implements ActivoDAO {
         
         return activo;  // Retorna el activo si se encuentra, o null si no existe
     }
-}
+}   */

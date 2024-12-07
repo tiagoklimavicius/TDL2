@@ -1,28 +1,23 @@
 package Modelo;
 
 public class Activo implements Comparable<Activo> {
-    private String nomenclatura;  // identificador de la moneda
-    private double cantidad;    
+    private double cantidad;
+    private int ID;
+    private int IDMoneda;
+    private int IDUsuario;
 
     public Activo() {                    //para ActivoDAOImpl
-    	
+
     }
-    
-    public Activo(String nomenclatura, double cantidad) {         //para el main
-    	this.nomenclatura = nomenclatura;
-    	this.cantidad = cantidad;
+
+    public Activo(double cantidad, int ID, int IDMoneda, int IDUsuario) {         //para el main
+        this.cantidad = cantidad;
+        this.ID=ID;
+        this.IDMoneda=IDMoneda;
+        this.IDUsuario=IDUsuario;
     }
-    
 
     // Getters y setters
-    public String getNomenclatura() {
-        return nomenclatura;
-    }
-
-    public void setNomenclatura(String nomenclatura) {
-        this.nomenclatura = nomenclatura;
-    }
-
     public double getCantidad() {
         return cantidad;
     }
@@ -30,9 +25,33 @@ public class Activo implements Comparable<Activo> {
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
-    
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getIDMoneda() {
+        return IDMoneda;
+    }
+
+    public void setIDMoneda(int IDMoneda) {
+        this.IDMoneda = IDMoneda;
+    }
+
+    public int getIDUsuario() {
+        return IDUsuario;
+    }
+
+    public void setIDUsuario(int IDUsuario) {
+        this.IDUsuario = IDUsuario;
+    }
+
     @Override 
     public int compareTo(Activo otroActivo) { 
-    	return Double.compare(this.cantidad, otroActivo.cantidad); 
+        return Double.compare(this.cantidad, otroActivo.cantidad); 
     }
 }

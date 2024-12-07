@@ -1,6 +1,7 @@
 package Modelo;
 
 public class Moneda implements Comparable<Moneda>{
+	private int ID;
     private String tipo; //fiat o crypto deberia ser enum
 	private String nombre;//bitcoin
     private String nomenclatura;//BTC
@@ -12,8 +13,9 @@ public class Moneda implements Comparable<Moneda>{
     	
     }
     
-    public Moneda(String tipo, String nombre, String nomenclatura, double valorDolar, double volatilidad, double stock) {
+    public Moneda(int ID, String tipo, String nombre, String nomenclatura, double valorDolar, double volatilidad, double stock) {
 		super();
+		this.ID=ID;
 		this.tipo = tipo;
 		this.nombre = nombre;
 		this.nomenclatura = nomenclatura;
@@ -22,7 +24,15 @@ public class Moneda implements Comparable<Moneda>{
 		this.stock = stock;
 	}
 	
-    public String getNombre() {
+    public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
+	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
