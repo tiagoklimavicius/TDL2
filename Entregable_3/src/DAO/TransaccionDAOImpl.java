@@ -11,11 +11,12 @@ public class TransaccionDAOImpl implements TransaccionDAO {
 
     @Override
     public void crear(Transaccion transaccion) {
-        String sql = "INSERT INTO TRANSACCION (RESUMEN, FECHA_HORA) VALUES (?, ?)";
+        String sql = "INSERT INTO TRANSACCION (RESUMEN, FECHA_HORADATETIME, ID_USUARIO) VALUES (?, ?, ?)";
         Connection connection = ConexionBD.getConnection();
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, transaccion.getResumen());
             pstmt.setTimestamp(2, Timestamp.valueOf(transaccion.getFechaHora()));
+            pstmt.setInt(3, transaccion.getIDUsuario());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -33,7 +34,9 @@ public class TransaccionDAOImpl implements TransaccionDAO {
             while (rs.next()) {
                 Transaccion transaccion = new Transaccion();
                 transaccion.setResumen(rs.getString("RESUMEN"));
-                transaccion.setFechaHora(rs.getTimestamp("FECHA_HORA").toLocalDateTime());
+                transaccion.setFechaHora(rs.getTimestamp("FECHA_HORADATETIME").toLocalDateTime());
+                transaccion.setIDUsuario(rs.getInt("ID_USUARIO"));
+                transaccion.setID(rs.getInt("ID"));
                 transacciones.add(transaccion);
             }
         } catch (SQLException e) {
@@ -45,31 +48,35 @@ public class TransaccionDAOImpl implements TransaccionDAO {
 
     @Override
     public void actualizar(Transaccion transaccion) {
-        String sql = "UPDATE TRANSACCION SET FECHA_HORA=? WHERE RESUMEN=?";                      //Funciona sinm problema pero tiene sentido que el valor identificativo sea el resumen? 
-        Connection connection = ConexionBD.getConnection();										// No es primary key asique no se podria repetir el resumen y que haya dos transacciones con mismo resumen?
+        String sql = "UPDATE TRANSACCION  SET RESUMEN = ?, SET FECHA_HORADATETIME = ?, SET ID_USUARIO = ? WHERE ID=?";                     
+        Connection connection = ConexionBD.getConnection();										
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setTimestamp(1, Timestamp.valueOf(transaccion.getFechaHora()));
             pstmt.setString(2, transaccion.getResumen());
+            pstmt.setInt(3, transaccion.getIDUsuario());
+ //           pstmt.setInt(4, transaccion.getID());         No veo el sentido de actualizar el ID porq es autoincremental y rompes toda la BD
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             e.printStackTrace();
         }
     }
-    
+
     @Override
-    public Transaccion obtener(String resumen) {
+    public Transaccion obtener(int ID) {
         String sql = "SELECT * FROM TRANSACCION WHERE RESUMEN = ?";
         Connection connection = ConexionBD.getConnection();
         Transaccion transaccion = null;
         
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, resumen);
+            pstmt.setInt(1, ID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     transaccion = new Transaccion();
                     transaccion.setResumen(rs.getString("RESUMEN"));
                     transaccion.setFechaHora(rs.getTimestamp("FECHA_HORA").toLocalDateTime());
+                    transaccion.setIDUsuario(rs.getInt("ID_USUARIO"));
+                    transaccion.setID(rs.getInt("ID"));
                     // Otros atributos si existen
                 }
             }

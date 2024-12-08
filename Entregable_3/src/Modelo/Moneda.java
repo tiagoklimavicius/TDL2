@@ -8,12 +8,13 @@ public class Moneda implements Comparable<Moneda>{
     private double valorDolar; //esto no lo teniamos
     private double volatilidad;//0 a 100 ver como ponerlo asi
     private double stock;   
+    private String nombreIcono;
     
     public Moneda() {
     	
     }
     
-    public Moneda(int ID, String tipo, String nombre, String nomenclatura, double valorDolar, double volatilidad, double stock) {
+    public Moneda(int ID, String tipo, String nombre, String nomenclatura, double valorDolar, double volatilidad, double stock, String nombreIcono) {
 		super();
 		this.ID=ID;
 		this.tipo = tipo;
@@ -22,6 +23,7 @@ public class Moneda implements Comparable<Moneda>{
 		this.valorDolar = valorDolar;
 		this.volatilidad = volatilidad;
 		this.stock = stock;
+		this.nombreIcono=nombreIcono;
 	}
 	
     public int getID() {
@@ -71,6 +73,14 @@ public class Moneda implements Comparable<Moneda>{
 		this.stock=stock;
 	}
 	
+	public String getNombreIcono() {
+		return nombreIcono;
+	}
+
+	public void setNombreIcono(String nombreIcono) {
+		this.nombreIcono = nombreIcono;
+	}
+
 	@Override  
 	public int compareTo(Moneda otraMoneda) { 
 		return Double.compare(this.valorDolar, otraMoneda.valorDolar); 

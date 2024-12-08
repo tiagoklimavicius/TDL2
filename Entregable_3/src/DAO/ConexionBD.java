@@ -61,9 +61,9 @@ protected static Connection c=null;
     		+ " TIPO       VARCHAR(1)    NOT NULL, "
     		+ " NOMBRE       VARCHAR(50)    NOT NULL, "
     		+ " NOMENCLATURA VARCHAR(10)  NOT NULL, "
-    		+ " VALOR_DOLARREAL     NOT NULL, "
-    		+ " VOLATILIDADREAL     NULL, "
-    		+ " STOCKREAL     NULL, "
+    		+ " VALOR_DOLAR     NOT NULL, "
+    		+ " VOLATILIDAD     NULL, "
+    		+ " STOCK     NULL, "
     		+ " NOMBRE_ICONO       VARCHAR(50)    NOT NULL "
     		+ ")";
     stmt.executeUpdate(sql);

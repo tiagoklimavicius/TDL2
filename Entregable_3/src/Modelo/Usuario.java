@@ -2,15 +2,19 @@ package Modelo;
 
 public class Usuario {
     private int ID;
-    private int ID_persona;
+    private int IDPersona;
     private String email;
     private String password;
     private boolean aceptaTerminos;
+    
+    public Usuario() {				//para UsuarioDAOImpl
+    	
+    }
 
-    public Usuario(int iD, int iD_persona, String email, String password, boolean aceptaTerminos) {
+    public Usuario(int ID, int IDPersona, String email, String password, boolean aceptaTerminos) {
         super();
-        ID = iD;
-        ID_persona = iD_persona;
+        this.ID = ID;
+        this.IDPersona = IDPersona;
         this.email = email;
         this.password = password;
         this.aceptaTerminos = aceptaTerminos;
@@ -19,14 +23,14 @@ public class Usuario {
     public int getID() {
         return ID;
     }
-    public void setID(int iD) {
-        ID = iD;
+    public void setID(int ID) {
+        this.ID = ID;
     }
-    public int getID_persona() {
-        return ID_persona;
+    public int getIDPersona() {
+        return IDPersona;
     }
-    public void setID_persona(int iD_persona) {
-        ID_persona = iD_persona;
+    public void setIDPersona(int IDPersona) {
+        this.IDPersona = IDPersona;
     }
     public String getEmail() {
         return email;
@@ -40,7 +44,7 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isAceptaTerminos() {
+    public boolean getAceptaTerminos() {
         return aceptaTerminos;
     }
     public void setAceptaTerminos(boolean aceptaTerminos) {

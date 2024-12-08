@@ -66,7 +66,6 @@ public class ActivoDAOImpl implements ActivoDAO {
             pstmt.setDouble(1, activo.getCantidad());
             pstmt.setInt(2, activo.getIDUsuario());
             pstmt.setInt(3, activo.getIDMoneda());
-            pstmt.setInt(4, activo.getID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -75,12 +74,12 @@ public class ActivoDAOImpl implements ActivoDAO {
     }
 
     @Override
-    public Activo obtener(int id) {
+    public Activo obtener(int ID) {
         String sql = "SELECT * FROM ACTIVO WHERE ID = ?";
         Connection connection = ConexionBD.getConnection();
         Activo activo = null;
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, ID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     activo = new Activo();

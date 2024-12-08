@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 public class Transaccion {
 	private int ID;
     private String resumen;           // string con la data del resumen
-    private LocalDateTime fechaHora;  // FECHA
+    private LocalDateTime fechaHora;
+    private int IDUsuario;
+    // FECHA
     // Operacion
     // Estado
 // Podriamos ver aca de si agregar los atributos que teniamos en el UML o respetar directamente lo que nos dieron ellos en la tabla
@@ -15,10 +17,11 @@ public class Transaccion {
     	
     }
     
-    public Transaccion(int ID, String resumen, LocalDateTime fechaHora) {
+    public Transaccion(int ID, String resumen, LocalDateTime fechaHora, int IDUsuario) {
     	this.ID=ID;
     	this.resumen = resumen;
     	this.fechaHora = fechaHora;
+    	this.IDUsuario=IDUsuario;
     }
 
 	// Getters y setters
@@ -46,4 +49,12 @@ public class Transaccion {
     public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
+
+	public int getIDUsuario() {
+		return IDUsuario;
+	}
+
+	public void setIDUsuario(int iDUsuario) {
+		IDUsuario = iDUsuario;
+	}
 }

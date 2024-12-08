@@ -1,5 +1,7 @@
 package Interfaces;
 
-public class UsuarioDAO {
+import Modelo.Usuario;
+
+public interface UsuarioDAO extends CRUD<Usuario> {
 
 }

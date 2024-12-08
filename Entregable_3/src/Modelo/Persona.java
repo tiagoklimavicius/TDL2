@@ -4,10 +4,14 @@ public class Persona {
     private int ID;
     private String nombres;
     private String apellidos;
+    
+    public Persona() {			//para PersonaDAOImpl
+    		
+    }
 
-    public Persona(int iD, String nombres, String apellidos) {
+    public Persona(int ID, String nombres, String apellidos) {
         super();
-        ID = iD;
+        this.ID = ID;
         this.nombres = nombres;
         this.apellidos = apellidos;
     }
@@ -16,8 +20,8 @@ public class Persona {
         return ID;
     }
 
-    public void setID(int iD) {
-        ID = iD;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getNombres() {
