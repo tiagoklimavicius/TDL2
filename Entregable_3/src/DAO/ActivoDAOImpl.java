@@ -11,7 +11,7 @@ public class ActivoDAOImpl implements ActivoDAO {
 
     @Override
     public void crear(Activo activo) {
-        String sql = "INSERT INTO ACTIVO (ID_USUARIO, ID_MONEDA, CANTIDADREAL) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO ACTIVO (ID_USUARIO, ID_MONEDA, CANTIDAD) VALUES (?, ?, ?)";
         Connection connection = ConexionBD.getConnection();
         try (PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             // Configurar los parámetros

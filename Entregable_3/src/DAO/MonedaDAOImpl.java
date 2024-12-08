@@ -4,9 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Interfaces.MonedaDAO;
 import Modelo.Moneda;
 
-public class MonedaDAOImpl {
+public class MonedaDAOImpl implements MonedaDAO {
 
     public void crear(Moneda moneda) {
         String sql = "INSERT INTO MONEDA (TIPO, NOMBRE, NOMENCLATURA, VALOR_DOLAR, VOLATILIDAD, STOCK, NOMBRE_ICONO) VALUES (?, ?, ?, ?, ?, ?, ?)";

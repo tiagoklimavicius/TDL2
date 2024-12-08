@@ -12,8 +12,14 @@ public class Usuario {
     }
 
     public Usuario(int ID, int IDPersona, String email, String password, boolean aceptaTerminos) {
-        super();
-        this.ID = ID;
+        this.ID=ID;
+        this.IDPersona = IDPersona;
+        this.email = email;
+        this.password = password;
+        this.aceptaTerminos = aceptaTerminos;
+    }
+    
+    public Usuario(int IDPersona, String email, String password, boolean aceptaTerminos) {
         this.IDPersona = IDPersona;
         this.email = email;
         this.password = password;
@@ -51,6 +57,12 @@ public class Usuario {
         this.aceptaTerminos = aceptaTerminos;
     }
 
-
+    public String toString() {
+	    return "ID: " + ID +
+	    		"IDPersona: " + IDPersona +
+	           ", Email: " + email +
+	           ", Password: " + password +
+	           ", Acepta terminos:" + aceptaTerminos;
+	}
 
 }

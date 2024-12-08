@@ -54,7 +54,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             pstmt.setString(2, usuario.getEmail());
             pstmt.setString(3, usuario.getPassword());
             pstmt.setBoolean(4, usuario.getAceptaTerminos());
-   //       pstmt.setInt(4, usuario.getID());
+            pstmt.setInt(5, usuario.getID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

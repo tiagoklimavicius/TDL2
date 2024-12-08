@@ -11,7 +11,7 @@ protected static Connection c=null;
             // Verificar si la conexión aún está abierta
             if (c == null || c.isClosed()) {
                 c = DriverManager.getConnection(BD_URL);
-               // System.out.println("Conexión realizada");
+                System.out.println("Conexión realizada");
                 creaciónDeTablasEnBD(c);
             }
         } catch (SQLException e) {
@@ -81,7 +81,7 @@ protected static Connection c=null;
     		+ "("
     		+ " ID     INTEGER   PRIMARY KEY AUTOINCREMENT NOT NULL , "
     		+ " RESUMEN VARCHAR(1000)   NOT NULL, "
-    		+ " FECHA_HORADATETIME  NOT NULL "
+    		+ " FECHA_HORADATETIME  NOT NULL, "
     		+ " ID_USUARIO INTEGER    NOT NULL, "
     		+ " FOREIGN KEY(ID_USUARIO) REFERENCES USUARIO(ID)"
     		+ ")";
