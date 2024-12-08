@@ -19,6 +19,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             pstmt.setString(3, usuario.getPassword());
             pstmt.setBoolean(4, usuario.getAceptaTerminos());
             pstmt.executeUpdate();
+            
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                int ID = rs.getInt(1);
+                usuario.setID(ID); 
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -68,6 +74,29 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         Usuario usuario = null;
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, ID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuario();
+                    usuario.setID(rs.getInt("ID"));
+                    usuario.setEmail(rs.getString("EMAIL"));
+                    usuario.setPassword(rs.getString("PASSWORD"));
+                    usuario.setIDPersona(rs.getInt("ID_PERSONA"));
+                    usuario.setAceptaTerminos(rs.getBoolean("ACEPTA_TERMINOS"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+    
+    @Override
+    public Usuario obtener(String email) {
+        String sql = "SELECT * FROM USUARIO WHERE EMAIL = ?";
+        Connection connection = ConexionBD.getConnection();
+        Usuario usuario = null;
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, email);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     usuario = new Usuario();

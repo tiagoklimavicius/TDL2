@@ -2,7 +2,7 @@ package Modelo;
 
 public class Usuario {
     private int ID;
-    private int IDPersona;
+    private int IDPersona; 	
     private String email;
     private String password;
     private boolean aceptaTerminos;

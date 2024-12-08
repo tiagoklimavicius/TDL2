@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import DAO.*;
 import Modelo.*;
 import Interfaces.*;
+import javax.swing.JCheckBox;
 
 public class Login extends JFrame implements ActionListener {
 
@@ -29,6 +30,7 @@ public class Login extends JFrame implements ActionListener {
 	private JTextField txtEmail;
 	private JTextField txtContraseña;
 	private JButton btnIngresar;
+	private JLabel lblAcceso;
 
 	/**
 	 * Launch the application.
@@ -53,6 +55,7 @@ public class Login extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 455, 320);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -63,14 +66,16 @@ public class Login extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		
 		JLabel lblLogin = new JLabel("INICIAR SESIÓN");
+		lblLogin.setForeground(Color.WHITE);
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogin.setFont(new Font("Yu Gothic Medium", Font.BOLD, 20));
 		lblLogin.setBounds(131, 6, 168, 59);
 		contentPane.add(lblLogin);
 		
 		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblEmail.setBackground(new Color(240, 240, 240));
+		lblEmail.setBackground(Color.WHITE);
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEmail.setBounds(24, 76, 72, 31);
 		contentPane.add(lblEmail);
@@ -81,6 +86,7 @@ public class Login extends JFrame implements ActionListener {
 		txtEmail.setColumns(10);
 		
 		JLabel lblContraseña = new JLabel("Contraseña:");
+		lblContraseña.setForeground(Color.WHITE);
 		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblContraseña.setBounds(24, 122, 85, 39);
 		contentPane.add(lblContraseña);
@@ -90,18 +96,17 @@ public class Login extends JFrame implements ActionListener {
 		txtContraseña.setBounds(131, 129, 204, 28);
 		contentPane.add(txtContraseña);
 		
-		JButton btnRestaurar = new JButton("Olvidé mi contraseña");
-		btnRestaurar.setBackground(Color.WHITE);
-		btnRestaurar.setForeground(Color.BLUE);
-		btnRestaurar.setBounds(131, 258, 204, 23);
-		contentPane.add(btnRestaurar);
-		
 		btnIngresar = new JButton("INGRESAR");
 		btnIngresar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnIngresar.addActionListener(this);
 		btnIngresar.setBounds(157, 183, 130, 23);
 		contentPane.add(btnIngresar);
 		
+		lblAcceso = new JLabel("");
+		lblAcceso.setForeground(Color.WHITE);
+		lblAcceso.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAcceso.setBounds(132, 239, 189, 31);
+		contentPane.add(lblAcceso);
 		
 	}
 
@@ -111,8 +116,13 @@ public class Login extends JFrame implements ActionListener {
 			String email = txtEmail.getText();
 			String contraseña = txtContraseña.getText();
 			UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-			usuarioDAO.crear(new Usuario(2, email, contraseña, false));
-			JOptionPane.showMessageDialog(null, "Ingreso exitoso");
+			Usuario usuario = usuarioDAO.obtener(email);
+			if(usuario == null) {
+				lblAcceso.setText("Ingreso denegado");
+			}
+			else {
+				lblAcceso.setText("Ingreso exitoso");
+			}
 		}
 		
 	}

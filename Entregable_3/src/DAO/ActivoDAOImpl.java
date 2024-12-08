@@ -22,13 +22,11 @@ public class ActivoDAOImpl implements ActivoDAO {
             // Ejecutar la consulta
             pstmt.executeUpdate();
 
-            // Obtener el ID generado
-     /*       try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    int generatedId = generatedKeys.getInt(1);
-                    activo.setID(generatedId); // Asignar el ID generado al modelo         
-                }
-            }   */
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                int ID = rs.getInt(1);
+                activo.setID(ID); // Asignar el ID_PERSONA al objeto usuario
+            }
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             e.printStackTrace();

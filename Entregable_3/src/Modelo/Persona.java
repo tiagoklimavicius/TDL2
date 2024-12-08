@@ -16,6 +16,12 @@ public class Persona {
         this.apellidos = apellidos;
     }
 
+    public Persona(String nombres, String apellidos) {
+        super();
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+    }
+    
     public int getID() {
         return ID;
     }

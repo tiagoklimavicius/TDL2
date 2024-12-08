@@ -12,11 +12,11 @@ import Interfaces.*;
 public class pruebasLogin {
 
 	public static void main(String[] args) {
-		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+	//	UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 		//Usuario usuario = new Usuario(1, "klimaviciustiago2@gmail.com", "hola", true);
 		//usuarioDAO.crear(usuario);
 		
-		List<Usuario> usuarios = usuarioDAO.listar(); 
+/*		List<Usuario> usuarios = usuarioDAO.listar(); 
 		for (Usuario usuario2 : usuarios) {
 		   		System.out.println(usuario2.toString());
 		}
@@ -34,8 +34,16 @@ public class pruebasLogin {
 		List<Usuario> usuarios2 = usuarioDAO.listar(); 
 		for (Usuario usuario2 : usuarios2) {
 		   		System.out.println(usuario2.toString());
-		}
+		}  */
 	
+		
+		PersonaDAO personaDAO = new PersonaDAOImpl();
+		Persona persona = new Persona("Tiago", "Klimavicius");
+		personaDAO.crear(persona);
+		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+		Usuario usuario = new Usuario(persona.getID(),"klimat@gmail.com", "aaa", true);
+		usuarioDAO.crear(usuario);
+		
 		
 
 	}

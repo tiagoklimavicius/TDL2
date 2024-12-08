@@ -17,6 +17,13 @@ public class PersonaDAOImpl implements PersonaDAO {
             pstmt.setString(1, persona.getNombres());
             pstmt.setString(2, persona.getApellidos());
             pstmt.executeUpdate();
+            
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                int ID = rs.getInt(1);
+                persona.setID(ID); // Asignar el ID_PERSONA al objeto usuario
+            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
