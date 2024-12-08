@@ -72,7 +72,7 @@ protected static Connection c=null;
     		+ " ID       INTEGER   PRIMARY KEY AUTOINCREMENT NOT NULL , "
     		+ " ID_USUARIO INTEGER    NOT NULL, "
     		+ " ID_MONEDA INTEGER    NOT NULL, "
-    		+ " CANTIDADREAL    NOT NULL, "
+    		+ " CANTIDAD    NOT NULL, "
     		+ " FOREIGN KEY(ID_USUARIO) REFERENCES USUARIO(ID),"
     		+ " FOREIGN KEY(ID_MONEDA) REFERENCES MONEDA(ID) "
     		+ ")";
