@@ -1,0 +1,1 @@
+termine todos los DAOImpl q me parece q quedaron bien y arranque con una GUI del login, esta bastante fulero pero sincerameente fue prueba y error para ver si las cosas iban andando. Hasta ahora la BD anda pero solamente probe las cosas sobre el usuario, puedo crear, listar y actualizar usuarios desde el codigo hacia la BD. Mañana continuaremos. Se pone complicado pero CONFIANZA
