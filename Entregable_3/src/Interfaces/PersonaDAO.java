@@ -1,6 +1,6 @@
 package Interfaces;
 
-import Modelo.Persona;
+import Entidad.Persona;
 
 public interface PersonaDAO extends CRUD<Persona> {
 

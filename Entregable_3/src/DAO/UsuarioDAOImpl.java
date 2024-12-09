@@ -4,8 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entidad.Usuario;
 import Interfaces.UsuarioDAO;
-import Modelo.Usuario;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 

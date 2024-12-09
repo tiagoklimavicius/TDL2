@@ -1,4 +1,4 @@
-package Modelo;
+package Entidad;
 
 public class Usuario {
     private int ID;

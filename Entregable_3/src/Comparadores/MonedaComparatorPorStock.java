@@ -2,7 +2,7 @@ package Comparadores;
 
 import java.util.Comparator;
 
-import Modelo.Moneda;
+import Entidad.Moneda;
 
 public class MonedaComparatorPorStock implements Comparator<Moneda> { 
 	@Override 

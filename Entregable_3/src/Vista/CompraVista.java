@@ -1,4 +1,4 @@
-package pruebas;
+package Vista;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -15,7 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class Compra extends JFrame {
+public class CompraVista extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -28,7 +28,7 @@ public class Compra extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Compra frame = new Compra();
+					CompraVista frame = new CompraVista();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class Compra extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Compra() {
+	public CompraVista() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 500);
 		contentPane = new JPanel();

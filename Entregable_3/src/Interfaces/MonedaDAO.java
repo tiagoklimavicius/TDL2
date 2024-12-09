@@ -1,6 +1,6 @@
 package Interfaces;
 
-import Modelo.Moneda;
+import Entidad.Moneda;
 
 public interface MonedaDAO extends CRUD<Moneda> {
 	

@@ -1,4 +1,4 @@
-package Modelo;
+package Entidad;
 
 public class Persona {
     private int ID;

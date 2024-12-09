@@ -4,8 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entidad.Activo;
 import Interfaces.ActivoDAO;
-import Modelo.Activo;
 
 public class ActivoDAOImpl implements ActivoDAO {
 

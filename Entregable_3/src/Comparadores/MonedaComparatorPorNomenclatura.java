@@ -2,7 +2,7 @@ package Comparadores;
 
 import java.util.Comparator;
 
-import Modelo.Moneda;
+import Entidad.Moneda;
 
 public class MonedaComparatorPorNomenclatura implements Comparator<Moneda> { 
 	

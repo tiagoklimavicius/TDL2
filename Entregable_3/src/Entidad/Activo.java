@@ -1,4 +1,4 @@
-package Modelo;
+package Entidad;
 
 public class Activo implements Comparable<Activo> {
     private double cantidad;

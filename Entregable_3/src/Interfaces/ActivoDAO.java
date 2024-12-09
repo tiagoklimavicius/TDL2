@@ -1,6 +1,6 @@
 package Interfaces;
 
-import Modelo.Activo;
+import Entidad.Activo;
 
 public interface ActivoDAO extends CRUD<Activo> {
 

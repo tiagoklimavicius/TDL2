@@ -2,7 +2,7 @@ package Comparadores;
 
 import java.util.Comparator;
 
-import Modelo.Activo;
+import Entidad.Activo;
 
 /*public class ActivoComparatorPorNomenclatura implements Comparator<Activo> {
     @Override

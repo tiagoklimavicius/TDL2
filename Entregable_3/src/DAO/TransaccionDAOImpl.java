@@ -4,8 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entidad.Transaccion;
 import Interfaces.TransaccionDAO;
-import Modelo.Transaccion;
 
 public class TransaccionDAOImpl implements TransaccionDAO {
 

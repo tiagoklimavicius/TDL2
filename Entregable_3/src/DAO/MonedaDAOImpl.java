@@ -4,8 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entidad.Moneda;
 import Interfaces.MonedaDAO;
-import Modelo.Moneda;
 
 public class MonedaDAOImpl implements MonedaDAO {
 

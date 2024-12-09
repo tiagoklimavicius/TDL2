@@ -1,8 +1,8 @@
-package pruebas;
+package Vista;
 
 import java.awt.Color;
 import DAO.*;
-import Modelo.*;
+import Entidad.*;
 import Interfaces.*;
 import java.awt.EventQueue;
 
@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -20,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 
-public class SignUp extends JFrame implements ActionListener {
+public class RegistroVista extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -41,7 +43,7 @@ public class SignUp extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SignUp frame = new SignUp();
+					RegistroVista frame = new RegistroVista();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,9 +55,9 @@ public class SignUp extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public SignUp() {
+	public RegistroVista() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 455, 500);
+		setBounds(100, 100, 530, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -136,7 +138,7 @@ public class SignUp extends JFrame implements ActionListener {
 		
 		chckbxTyC = new JCheckBox("Acepto terminos y condiciones");
 		chckbxTyC.setBounds(116, 280, 205, 23);
-		chckbxTyC.addActionListener(this);
+	//	chckbxTyC.addActionListener(this);
 		contentPane.add(chckbxTyC);
 		
 		lblAceptarTyC = new JLabel("");
@@ -146,7 +148,7 @@ public class SignUp extends JFrame implements ActionListener {
 		
 		btnConfirmar = new JButton("CONFIRMAR");
 		btnConfirmar.setBounds(116, 383, 205, 23);
-		btnConfirmar.addActionListener(this);
+	//	btnConfirmar.addActionListener(this);
 		contentPane.add(btnConfirmar);
 		
 		lblExito = new JLabel("");
@@ -155,45 +157,43 @@ public class SignUp extends JFrame implements ActionListener {
 		lblExito.setBounds(116, 424, 205, 26);
 		contentPane.add(lblExito);
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(btnConfirmar==e.getSource()) {
-			String nombres = textNombre.getText();
-			String apellidos = textApellido.getText();
-			String email = textEmail.getText();
-			String contraseña = textContra.getText();
-			String contraseña2 = textContra2.getText();
-			
-			UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-			Usuario usuario = usuarioDAO.obtener(email);
-			if(usuario == null) {										//ademas de que sea != de null hay que verificar que la longitud de los campos es >0 porq se puede dejar el espacio en blanco sino
-				if(contraseña.equals(contraseña2)) {
-					if(chckbxTyC.isSelected()) {
-						//si selecciono terminos y condiciones
-						// no existe el mail y la contraseña esta bien
-						PersonaDAO personaDAO = new PersonaDAOImpl();
-						Persona persona = new Persona(nombres,apellidos);
-						personaDAO.crear(persona);
-						usuarioDAO.crear(new Usuario(persona.getID(), email, contraseña, true));
-						lblExito.setText("Registro exitoso");
-					}
-					else {
-						lblAceptarTyC.setText("Debe aceptar los terminos y condiciones");
-					}
-				}
-				else {
-				lblExito.setText("Las contraseñas no coinciden");
-				}
-			}
-			else {
-				lblExito.setText("Error. El usuario ya existe");
-			}
-			
-			
-			
-			
-		}
-		
+	
+	//getter y setter
+	
+	public String getNombre() {
+		return textNombre.getText();
 	}
+	
+	public String getApellido() {
+		return textApellido.getText();
+	}
+	
+	public String getEmail() {
+		return textEmail.getText();
+	}
+	
+	public String getContraseña() {
+		return textContra.getText();
+	}
+	
+	public String getContraseña2() {
+		return textContra2.getText();
+	}
+	
+	public JButton getBtnConfirmar() {
+		return btnConfirmar;
+	}
+	
+	public boolean isChckbxTyCSelected() {
+	    return chckbxTyC.isSelected();
+	}
+	
+	public void mostrarMensajeError(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje, "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+	}
+
 }

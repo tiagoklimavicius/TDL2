@@ -1,6 +1,6 @@
 package Interfaces;
 
-import Modelo.Transaccion;
+import Entidad.Transaccion;
 
 public interface TransaccionDAO extends CRUD<Transaccion>{
 

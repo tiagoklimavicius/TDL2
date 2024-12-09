@@ -1,9 +1,10 @@
-package pruebas;
+package Vista;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -19,18 +20,18 @@ import java.awt.Color;
 import javax.swing.JButton;
 
 import DAO.*;
-import Modelo.*;
+import Entidad.*;
 import Interfaces.*;
 import javax.swing.JCheckBox;
 
-public class Login extends JFrame implements ActionListener {
+public class LoginVista extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtEmail;
-	private JTextField txtContraseña;
+	private JPasswordField txtContraseña;
 	private JButton btnIngresar;
-	private JLabel lblAcceso;
+	private JButton btnRegistrarse;
 
 	/**
 	 * Launch the application.
@@ -39,7 +40,7 @@ public class Login extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					LoginVista frame = new LoginVista();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,9 +52,9 @@ public class Login extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public LoginVista() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 455, 320);
+		setBounds(100, 100, 530, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,39 +92,49 @@ public class Login extends JFrame implements ActionListener {
 		lblContraseña.setBounds(24, 122, 85, 39);
 		contentPane.add(lblContraseña);
 		
-		txtContraseña = new JTextField();
+		txtContraseña = new JPasswordField();
 		txtContraseña.setColumns(10);
 		txtContraseña.setBounds(131, 129, 204, 28);
 		contentPane.add(txtContraseña);
 		
 		btnIngresar = new JButton("INGRESAR");
 		btnIngresar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnIngresar.addActionListener(this);
 		btnIngresar.setBounds(157, 183, 130, 23);
 		contentPane.add(btnIngresar);
 		
-		lblAcceso = new JLabel("");
-		lblAcceso.setForeground(Color.WHITE);
-		lblAcceso.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAcceso.setBounds(132, 239, 189, 31);
-		contentPane.add(lblAcceso);
+		btnRegistrarse = new JButton("REGISTRARSE");
+		btnRegistrarse.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnRegistrarse.setBackground(new Color(240, 240, 240));
+		btnRegistrarse.setBounds(157, 247, 130, 23);
+		contentPane.add(btnRegistrarse);
 		
 	}
+	// Getter y Setter para btnIngresar
+	public JButton getBtnIngresar() {
+	    return btnIngresar;
+	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(btnIngresar==e.getSource()) {
-			String email = txtEmail.getText();
-			String contraseña = txtContraseña.getText();
-			UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-			Usuario usuario = usuarioDAO.obtener(email);
-			if(usuario == null) {
-				lblAcceso.setText("Ingreso denegado");
-			}
-			else {
-				lblAcceso.setText("Ingreso exitoso");
-			}
-		}
-		
+	public JButton getBtnRegistrarse() {
+	   	return btnRegistrarse;
+	}
+
+	// Getter y Setter para txtContraseña
+	public String getContraseña() {
+		char[] passwordArray = txtContraseña.getPassword();
+		String contraseña = new String(passwordArray);
+		return contraseña;
+	}
+
+	// Getter y Setter para txtEmail
+	public String getEmail() {
+	    return txtEmail.getText();
+	}
+	
+	public void mostrarMensajeError(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje, "Acceso exitoso", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

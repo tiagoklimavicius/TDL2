@@ -1,4 +1,4 @@
-package pruebas;
+package Vista;
 import javax.swing.*;
 import java.awt.*;
 

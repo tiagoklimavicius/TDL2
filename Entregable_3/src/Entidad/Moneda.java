@@ -1,4 +1,4 @@
-package Modelo;
+package Entidad;
 
 public class Moneda implements Comparable<Moneda>{
 	private int ID;

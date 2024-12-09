@@ -1,4 +1,4 @@
-package pruebas;
+package Vista;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -14,10 +14,11 @@ import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 
-public class Cotizaciones extends JFrame {
+public class CotizacionesVista extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JButton btnVolver;
 
 	/**
 	 * Launch the application.
@@ -26,7 +27,7 @@ public class Cotizaciones extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cotizaciones frame = new Cotizaciones();
+					CotizacionesVista frame = new CotizacionesVista();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +39,7 @@ public class Cotizaciones extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cotizaciones() {
+	public CotizacionesVista() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 500);
 		contentPane = new JPanel();
@@ -47,6 +48,10 @@ public class Cotizaciones extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		setTitle("ACE WALLET");
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		JLabel lblCripto = new JLabel("CRIPTO");
 		lblCripto.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -107,7 +112,7 @@ public class Cotizaciones extends JFrame {
 		lblDogeImagen.setBounds(40, 360, 50, 50);
 		contentPane.add(lblDogeImagen);
 		
-		JButton btnVolver = new JButton("VOLVER");
+		btnVolver = new JButton("VOLVER");
 		btnVolver.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVolver.setBounds(220, 427, 89, 23);
 		contentPane.add(btnVolver);
@@ -203,9 +208,9 @@ public class Cotizaciones extends JFrame {
 		contentPane.add(btnComprarUsdc);
 		
 		//CONFIGURACION IMAGEN USUARIO
-				ImageIcon iconoUsuario = new ImageIcon("src/Media/usuario.png");
-				img = iconoUsuario.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-				iconoUsuario = new ImageIcon(img);
+		ImageIcon iconoUsuario = new ImageIcon("src/Media/usuario.png");
+		img = iconoUsuario.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		iconoUsuario = new ImageIcon(img);
 		
 		JLabel lblUsuario = new JLabel("Usuario", iconoUsuario, JLabel.LEFT);
 		lblUsuario.setBounds(465, 5, 50, 50);
@@ -219,4 +224,10 @@ public class Cotizaciones extends JFrame {
 		contentPane.add(lblNombreUsuario);
 	}
 
+	//getter y setter
+	
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
+	
 }

@@ -1,10 +1,10 @@
-package pruebas;
+package Vista;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import DAO.*;
-import Modelo.*;
+import Entidad.*;
 import Comparadores.*;
 import Interfaces.*;
 
