@@ -167,7 +167,7 @@ public class SignUp extends JFrame implements ActionListener {
 			
 			UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 			Usuario usuario = usuarioDAO.obtener(email);
-			if(usuario == null) {
+			if(usuario == null) {										//ademas de que sea != de null hay que verificar que la longitud de los campos es >0 porq se puede dejar el espacio en blanco sino
 				if(contraseña.equals(contraseña2)) {
 					if(chckbxTyC.isSelected()) {
 						//si selecciono terminos y condiciones
