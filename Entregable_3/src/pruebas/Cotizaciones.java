@@ -90,18 +90,18 @@ public class Cotizaciones extends JFrame {
 		contentPane.add(lblUsdcImagen);
 		
 		//CONFIGURACION IMAGEN USDT
-				ImageIcon iconoUsdt = new ImageIcon("src/Media/usdt.png");
-		        img = iconoUsdt.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-		        iconoUsdt = new ImageIcon(img);
+		ImageIcon iconoUsdt = new ImageIcon("src/Media/usdt.png");
+		img = iconoUsdt.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		iconoUsdt = new ImageIcon(img);
 		
 		JLabel lblUsdtImagen = new JLabel("Usdt", iconoUsdt, JLabel.LEFT);
 		lblUsdtImagen.setBounds(40, 295, 50, 50);
 		contentPane.add(lblUsdtImagen);
 		
 		//CONFIGURACION IMAGEN DOGECOIN
-				ImageIcon iconoDoge = new ImageIcon("src/Media/dogecoin.png");
-		        img = iconoDoge.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-		        iconoDoge = new ImageIcon(img);
+		ImageIcon iconoDoge = new ImageIcon("src/Media/dogecoin.png");
+		img = iconoDoge.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		iconoDoge = new ImageIcon(img);
 		
 		JLabel lblDogeImagen = new JLabel("Dogecoin", iconoDoge, JLabel.LEFT);
 		lblDogeImagen.setBounds(40, 360, 50, 50);
@@ -170,7 +170,7 @@ public class Cotizaciones extends JFrame {
 		JButton btnComprarBtc = new JButton("COMPRAR");
 		btnComprarBtc.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnComprarBtc.setForeground(Color.WHITE);
-		btnComprarBtc.setBackground(SystemColor.textText);
+		btnComprarBtc.setBackground(Color.BLACK);
 		btnComprarBtc.setBounds(355, 114, 89, 23);
 		contentPane.add(btnComprarBtc);
 		
@@ -201,6 +201,22 @@ public class Cotizaciones extends JFrame {
 		btnComprarUsdc.setBackground(Color.BLACK);
 		btnComprarUsdc.setBounds(355, 244, 89, 23);
 		contentPane.add(btnComprarUsdc);
+		
+		//CONFIGURACION IMAGEN USUARIO
+				ImageIcon iconoUsuario = new ImageIcon("src/Media/usuario.png");
+				img = iconoUsuario.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+				iconoUsuario = new ImageIcon(img);
+		
+		JLabel lblUsuario = new JLabel("Usuario", iconoUsuario, JLabel.LEFT);
+		lblUsuario.setBounds(465, 5, 50, 50);
+		contentPane.add(lblUsuario);
+		
+		String usuario = "Tiago";
+		JLabel lblNombreUsuario = new JLabel(usuario);       //Aca va el nombre del usuario usando usuarioDAO.obtener(usuario).getNombres() pero ya desde el controlador
+		lblNombreUsuario.setForeground(Color.WHITE);
+		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNombreUsuario.setBounds(475, 50, 46, 14);
+		contentPane.add(lblNombreUsuario);
 	}
 
 }
