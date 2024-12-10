@@ -1,5 +1,14 @@
 package Modelo;
 
-public class BalanceModelo {
+import DAO.PersonaDAOImpl;
+import Entidad.Usuario;
+import Interfaces.PersonaDAO;
 
+
+public class BalanceModelo {
+	public String buscarNombre(Usuario user) {
+		PersonaDAO personaDAO = new PersonaDAOImpl();
+		String nombre = personaDAO.obtener(user.getIDPersona()).getNombres();
+		return nombre;
+	}
 }

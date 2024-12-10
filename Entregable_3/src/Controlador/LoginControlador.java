@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 
+import Entidad.Usuario;
 import Vista.BalanceVista;
 import Vista.LoginVista;
 import Vista.RegistroVista;
@@ -19,6 +20,7 @@ public class LoginControlador {
 	private RegistroModelo modeloReg;
 	private BalanceModelo modeloBal;
 	private BalanceVista vistaBal;
+	private Usuario user;
 	
 	public LoginControlador(LoginModelo modelo, LoginVista vista) {
 		this.modelo=modelo;
@@ -59,16 +61,17 @@ public class LoginControlador {
 				if (email.isEmpty() || contraseña.isEmpty()) {
 	                throw new IllegalArgumentException("Ningún campo puede estar vacío.");
 	            }
-				
-				if(modelo.verificarUsuario(email, contraseña)) {
+				user = modelo.verificarUsuario(email, contraseña);
+				if(user!=null) {
 					//el usuario existe y la contraseña coincide
 					//debe acceder a la aplicacion y pasar a la seccion de balance (NO IMPLEMENTADA TODAVIA)
 					vista.mostrarMensaje("Ha iniciado sesión correctamente.");       
-					new BalanceControlador(modeloBal,vistaBal);		//este new esta aca porque requiere que se haya iniciado sesion primero para poder activarse
+					//ACCESO A SECCION BALANCE
+					new BalanceControlador(modeloBal,vistaBal,user);		//este new esta aca porque requiere que se haya iniciado sesion primero para poder activarse
 					vistaBal.setVisible(true);
 					vista.dispose();
 					
-					//ACCESO A SECCION BALANCE
+					
 				}
 				else {
 					vista.mostrarMensajeError("Email o contraseña incorrectos. Intente nuevamente.");

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Image;
@@ -19,6 +20,13 @@ public class CotizacionesVista extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnVolver;
+	private JLabel lblNombreUsuario;
+	private JButton btnCerrar;
+	private JButton btnComprarBtc;
+	private JButton btnComprarEth;
+	private JButton btnComprarUsdc;
+	private JButton btnComprarUsdt;
+	private JButton btnComprarDoge;
 
 	/**
 	 * Launch the application.
@@ -172,35 +180,35 @@ public class CotizacionesVista extends JFrame {
 		lblPrecioDoge.setBounds(227, 378, 100, 14);
 		contentPane.add(lblPrecioDoge);
 		
-		JButton btnComprarBtc = new JButton("COMPRAR");
+		btnComprarBtc = new JButton("COMPRAR");
 		btnComprarBtc.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnComprarBtc.setForeground(Color.WHITE);
 		btnComprarBtc.setBackground(Color.BLACK);
 		btnComprarBtc.setBounds(355, 114, 89, 23);
 		contentPane.add(btnComprarBtc);
 		
-		JButton btnComprarEth = new JButton("COMPRAR");
+		btnComprarEth = new JButton("COMPRAR");
 		btnComprarEth.setForeground(Color.WHITE);
 		btnComprarEth.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnComprarEth.setBackground(Color.BLACK);
 		btnComprarEth.setBounds(355, 179, 89, 23);
 		contentPane.add(btnComprarEth);
 		
-		JButton btnComprarUsdt = new JButton("COMPRAR");
+		btnComprarUsdt = new JButton("COMPRAR");
 		btnComprarUsdt.setForeground(Color.WHITE);
 		btnComprarUsdt.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnComprarUsdt.setBackground(Color.BLACK);
 		btnComprarUsdt.setBounds(355, 309, 89, 23);
 		contentPane.add(btnComprarUsdt);
 		
-		JButton btnComprarDoge = new JButton("COMPRAR");
+		btnComprarDoge = new JButton("COMPRAR");
 		btnComprarDoge.setForeground(Color.WHITE);
 		btnComprarDoge.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnComprarDoge.setBackground(Color.BLACK);
 		btnComprarDoge.setBounds(355, 374, 89, 23);
 		contentPane.add(btnComprarDoge);
 		
-		JButton btnComprarUsdc = new JButton("COMPRAR");
+		btnComprarUsdc = new JButton("COMPRAR");
 		btnComprarUsdc.setForeground(Color.WHITE);
 		btnComprarUsdc.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnComprarUsdc.setBackground(Color.BLACK);
@@ -211,17 +219,22 @@ public class CotizacionesVista extends JFrame {
 		ImageIcon iconoUsuario = new ImageIcon("src/Media/usuario.png");
 		img = iconoUsuario.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		iconoUsuario = new ImageIcon(img);
+		contentPane.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario", iconoUsuario, JLabel.LEFT);
-		lblUsuario.setBounds(465, 5, 50, 50);
+		lblUsuario.setBounds(354, 5, 50, 50);
 		contentPane.add(lblUsuario);
 		
-		String usuario = "Tiago";
-		JLabel lblNombreUsuario = new JLabel(usuario);       //Aca va el nombre del usuario usando usuarioDAO.obtener(usuario).getNombres() pero ya desde el controlador
+		lblNombreUsuario = new JLabel("");   
 		lblNombreUsuario.setForeground(Color.WHITE);
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombreUsuario.setBounds(475, 50, 46, 14);
+		lblNombreUsuario.setBounds(440, 11, 46, 14);
 		contentPane.add(lblNombreUsuario);
+		
+		btnCerrar = new JButton("Cerrar sesión");
+		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnCerrar.setBounds(415, 28, 89, 23);
+		contentPane.add(btnCerrar);
 	}
 
 	//getter y setter
@@ -230,4 +243,39 @@ public class CotizacionesVista extends JFrame {
 		return btnVolver;
 	}
 	
+	public void setNombreUsuario(String nombre) {
+		lblNombreUsuario.setText(nombre);
+	}
+	
+	public JButton getBtnCerrar() {
+		return btnCerrar;
+	}
+	
+	public void mostrarMensajeError(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public JButton getBtnComprarBtc() {
+		return btnComprarBtc;
+	}
+	
+	public JButton getBtnComprarEth() {
+		return btnComprarEth;
+	}
+	
+	public JButton getBtnComprarUsdc() {
+		return btnComprarUsdc;
+	}
+	
+	public JButton getBtnComprarUsdt() {
+		return btnComprarUsdt;
+	}
+	
+	public JButton getBtnComprarDoge() {
+		return btnComprarDoge;
+	}
 }

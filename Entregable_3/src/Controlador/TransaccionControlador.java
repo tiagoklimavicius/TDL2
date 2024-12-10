@@ -1,29 +1,25 @@
 package Controlador;
 
-import Entidad.Moneda;
+import java.util.List;
+
 import Entidad.Usuario;
 import Modelo.BalanceModelo;
-import Modelo.CompraModelo;
-import Modelo.CotizacionesModelo;
 import Modelo.LoginModelo;
+import Modelo.TransaccionModelo;
 import Vista.BalanceVista;
-import Vista.CompraVista;
-import Vista.CotizacionesVista;
 import Vista.LoginVista;
+import Vista.TransaccionVista;
 
-public class CotizacionesControlador {
-	private CotizacionesModelo modelo;
-	private CotizacionesVista vista;
+public class TransaccionControlador {
+	private TransaccionModelo modelo;
+	private TransaccionVista vista;
 	private BalanceModelo modeloBal;
 	private BalanceVista vistaBal;
 	private LoginModelo modeloLog;
 	private LoginVista vistaLog;
-	private CompraModelo modeloCom;
-	private CompraVista vistaCom;
 	private Usuario user;
-	private Moneda moneda;
 	
-	public CotizacionesControlador(CotizacionesModelo modelo, CotizacionesVista vista, Usuario user) {
+	public TransaccionControlador(TransaccionModelo modelo, TransaccionVista vista, Usuario user) {
 		this.modelo=modelo;
 		this.vista=vista;
 		this.user=user;
@@ -34,18 +30,19 @@ public class CotizacionesControlador {
 		modeloLog = new LoginModelo();
 		vistaLog = new LoginVista();
 		
-		modeloCom = new CompraModelo();
-		vistaCom = new CompraVista();
+		
+		//Cargar las transacciones del usuario
+		List<String> transacciones =modelo.buscarTransacciones(user);
+		for(String transaccion : transacciones) {
+			vista.agregarTransaccion(transaccion);
+		}
 		
 		
 		this.vista.getBtnVolver().addActionListener(e -> {
 			new BalanceControlador(modeloBal, vistaBal, user);
 			vistaBal.setVisible(true); //se abre la ventana de balances
-			vista.dispose();			//se cierra la ventana de cotizaciones
+			vista.dispose();			//se cierra la ventana de transacciones
 		});
-		
-		//poner nombre de usuario
-		this.vista.setNombreUsuario(modelo.buscarNombre(user));
 		
 		this.vista.getBtnCerrar().addActionListener(e -> {
 			new LoginControlador(modeloLog, vistaLog);
@@ -53,10 +50,7 @@ public class CotizacionesControlador {
 			vista.dispose();			//se cierra la ventana de transacciones
 		});
 		
-		this.vista.getBtnComprarBtc().addActionListener(e -> {
-			new CompraControlador(modeloCom, vistaCom, user, moneda);				//AGREGAR LA MONEDA DE ALGUNA FORMA
-			vistaCom.setVisible(true); //se abre la ventana de login
-			vista.dispose();			//se cierra la ventana de transacciones
-		});
-	}	
+		//poner nombre de usuario
+				this.vista.setNombreUsuario(modelo.buscarNombre(user));
+	}
 }

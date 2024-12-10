@@ -6,16 +6,15 @@ import Entidad.Usuario;
 
 public class LoginModelo {
 	
-	public boolean verificarUsuario(String email, String password) {
+	public Usuario verificarUsuario(String email, String password) {
 		boolean check = false;
 		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 		Usuario usuario = usuarioDAO.obtener(email);
-		if(usuario !=null) {					
-			if(usuario.getPassword().equals(password)) {
-			//el usuario existe y coincide la contraseña ---> PUEDE INGRESAR
-			check = true;
+		if(usuario !=null) {							//si el usuario es distinto de null
+			if(!usuario.getPassword().equals(password)) {
+			usuario=null;				//si el usuario existe pero la contraseña esta mal devuelvo null
 			}
 		}
-		return check;
+		return usuario;					//en caso de que no tenga problema con el null va a devolver el usuario completo con los datos correctos.
 	}
 }
