@@ -17,8 +17,7 @@ public class Transaccion {
     	
     }
     
-    public Transaccion(int ID, String resumen, LocalDateTime fechaHora, int IDUsuario) {
-    	this.ID=ID;
+    public Transaccion(String resumen, LocalDateTime fechaHora, int IDUsuario) {
     	this.resumen = resumen;
     	this.fechaHora = fechaHora;
     	this.IDUsuario=IDUsuario;

@@ -53,9 +53,42 @@ public class CotizacionesControlador {
 			vista.dispose();			//se cierra la ventana de transacciones
 		});
 		
+		
+		
+		//BOTONES DE COMPRA PARA CADA MONEDA
+		
 		this.vista.getBtnComprarBtc().addActionListener(e -> {
-			new CompraControlador(modeloCom, vistaCom, user, moneda);				//AGREGAR LA MONEDA DE ALGUNA FORMA
-			vistaCom.setVisible(true); //se abre la ventana de login
+			moneda = modelo.obtenerMoneda("BTC");
+			new CompraControlador(modeloCom, vistaCom, user, moneda);				//OBTENGO LA MONEDA BTC Y LLAMO A LA COMPRA
+			vistaCom.setVisible(true); //se abre la ventana de compra
+			vista.dispose();			//se cierra la ventana de transacciones
+		});
+		
+		this.vista.getBtnComprarEth().addActionListener(e -> {
+			moneda = modelo.obtenerMoneda("ETH");
+			new CompraControlador(modeloCom, vistaCom, user, moneda);				//OBTENGO LA MONEDA ETH Y LLAMO A LA COMPRA
+			vistaCom.setVisible(true); //se abre la ventana de compra
+			vista.dispose();			//se cierra la ventana de transacciones
+		});
+		
+		this.vista.getBtnComprarUsdc().addActionListener(e -> {
+			moneda = modelo.obtenerMoneda("USDC");
+			new CompraControlador(modeloCom, vistaCom, user, moneda);				//OBTENGO LA MONEDA USDC Y LLAMO A LA COMPRA
+			vistaCom.setVisible(true); //se abre la ventana de compra
+			vista.dispose();			//se cierra la ventana de transacciones
+		});
+		
+		this.vista.getBtnComprarUsdt().addActionListener(e -> {
+			moneda = modelo.obtenerMoneda("USDT");
+			new CompraControlador(modeloCom, vistaCom, user, moneda);				//OBTENGO LA MONEDA USDT Y LLAMO A LA COMPRA
+			vistaCom.setVisible(true); //se abre la ventana de compra
+			vista.dispose();			//se cierra la ventana de transacciones
+		});
+		
+		this.vista.getBtnComprarDoge().addActionListener(e -> {
+			moneda = modelo.obtenerMoneda("DOGE");
+			new CompraControlador(modeloCom, vistaCom, user, moneda);				//OBTENGO LA MONEDA DOGE Y LLAMO A LA COMPRA
+			vistaCom.setVisible(true); //se abre la ventana de compra
 			vista.dispose();			//se cierra la ventana de transacciones
 		});
 	}	

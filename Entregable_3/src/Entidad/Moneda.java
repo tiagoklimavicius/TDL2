@@ -14,9 +14,8 @@ public class Moneda implements Comparable<Moneda>{
     	
     }
     
-    public Moneda(int ID, String tipo, String nombre, String nomenclatura, double valorDolar, double volatilidad, double stock, String nombreIcono) {
+    public Moneda(String tipo, String nombre, String nomenclatura, double valorDolar, double volatilidad, double stock, String nombreIcono) {
 		super();
-		this.ID=ID;
 		this.tipo = tipo;
 		this.nombre = nombre;
 		this.nomenclatura = nomenclatura;

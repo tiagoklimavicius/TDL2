@@ -34,6 +34,7 @@ public class TransaccionControlador {
 		//Cargar las transacciones del usuario
 		List<String> transacciones =modelo.buscarTransacciones(user);
 		for(String transaccion : transacciones) {
+			
 			vista.agregarTransaccion(transaccion);
 		}
 		

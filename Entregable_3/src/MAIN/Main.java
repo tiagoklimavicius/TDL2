@@ -6,7 +6,7 @@ import Vista.LoginVista;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		LoginModelo modeloLog = new LoginModelo();
 		LoginVista vistaLog = new LoginVista();
 		new LoginControlador(modeloLog, vistaLog);

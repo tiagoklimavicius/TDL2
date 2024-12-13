@@ -8,11 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -29,6 +32,7 @@ public class CompraVista extends JFrame {
 	private JLabel lblEquivalente;
 	private JButton btnConfirmar;
 	private JButton btnCancelar;
+	private JLabel lblCriptoImagen;
 
 	/**
 	 * Launch the application.
@@ -59,11 +63,14 @@ public class CompraVista extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		setResizable(false);
+		setLocationRelativeTo(null);
+		
 												
 		lblComprarCripto = new JLabel("");
 		lblComprarCripto.setForeground(Color.WHITE);
 		lblComprarCripto.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblComprarCripto.setBounds(10, 11, 207, 49);
+		lblComprarCripto.setBounds(80, 11, 207, 49);
 		contentPane.add(lblComprarCripto);
 		
 										
@@ -123,9 +130,32 @@ public class CompraVista extends JFrame {
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setBounds(269, 410, 120, 30);
 		contentPane.add(btnCancelar);
+		
+		//IMAGEN DE LA CRIPTO
+		
+		lblCriptoImagen = new JLabel("", JLabel.LEFT);
+		lblCriptoImagen.setBounds(10, 11, 50, 50);
+		contentPane.add(lblCriptoImagen);
 	}
 	
 	//getter y setter
+	
+	public void setIconoCripto(String nombreArchivo) {
+		try {
+	        // Crea el path completo de la imagen
+	        String rutaImagen = "src/Media/" + nombreArchivo;
+
+	        // Crea el nuevo icono escalado
+	        ImageIcon iconoCripto = new ImageIcon(rutaImagen);
+	        Image img = iconoCripto.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+	        iconoCripto = new ImageIcon(img);
+
+	        // Establece el icono en el JLabel
+	        lblCriptoImagen.setIcon(iconoCripto);
+	    } catch (Exception e) {
+	        System.err.println("Error al cargar la imagen: " + e.getMessage());
+	    } 
+	}
 	
 	public double getCantidad() {
 	    try {
@@ -142,11 +172,11 @@ public class CompraVista extends JFrame {
 	}
 	
 	public void setCriptoNombre(String nombre) {
-		lblCripto.setText(nombre);
+		lblCripto.setText(nombre.toUpperCase());
 	}
 	
 	public void setPrecio(double precio) {
-		lblPrecioCripto.setText(String.valueOf(precio));
+		lblPrecioCripto.setText("$" + String.valueOf(precio));
 	}
 	
 	public void agregarItem(String fiat) {
@@ -163,6 +193,10 @@ public class CompraVista extends JFrame {
 	
 	public void setEquivalente(double equiv) {
 		lblEquivalente.setText(String.valueOf(equiv));
+	}
+	
+	public double getEquivalente() {
+		return Double.parseDouble(lblEquivalente.getText());
 	}
 	
 	public JButton getBtnConfirmar() {

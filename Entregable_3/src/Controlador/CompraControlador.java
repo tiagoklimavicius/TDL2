@@ -1,5 +1,7 @@
 package Controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import Entidad.Moneda;
@@ -31,6 +33,15 @@ public class CompraControlador {
 		vistaCot = new CotizacionesVista();
 		
 		
+		//configurar todo el modelo de la compra utilizando la moneda recibida
+		this.vista.setCriptoN(moneda.getNomenclatura());  	//seteo la nomenclatura de la cripto
+		this.vista.setCriptoNombre(moneda.getNombre());		//seteo el nombre de la cripto
+		this.vista.setPrecio(moneda.getValorDolar());		//DEJARLO ASI O AL MISMO TIEMPO OBTENER EL VALOR ACTUALIZADO CADA 5 SEGUNDOS.
+		this.vista.setIconoCripto(moneda.getNombreIcono());
+		
+		
+		
+		
 		//cargar las posibles fiat a elegir
 		List<String> fiats = modelo.obtenerFiat(user);
 		for(String fiat : fiats) {
@@ -49,22 +60,58 @@ public class CompraControlador {
 		
 		//antes de hacer la compra hay q calcular el btnEquivalente para poder mostrar el monto en pantalla
 		
-		this.vista.getBtnConfirmar().addActionListener(e -> {
-			//ejecutar toda la compra aca
-			double monto = this.vista.getCantidad();
-			String fiat = this.vista.obtenerItem();
-			//  obtener la fiat de la listita de monedas
-		//	modelo.comprar(monto, fiat, user,moneda);
+	
 			
-			
-			
-			new CotizacionesControlador(modeloCot, vistaCot, user);
-			vistaCot.setVisible(true); //se abre la ventana de login
-			vista.dispose();			//se cierra la ventana de transacciones
-		});
+
 		
-		this.vista.getBtnConvertir().addActionListener(e -> {
-			
-		});
+		
+		this.vista.getBtnConfirmar().addActionListener(new ConfirmarListener());
+		this.vista.getBtnConvertir().addActionListener(new ConvertirListener());
 	}	
+	
+	class ConvertirListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			try {
+				
+				double monto = vista.getCantidad();
+				String fiat = vista.obtenerItem();
+				
+				if (vista.obtenerItem() == null) {
+				    throw new IllegalArgumentException("Debe seleccionar una moneda fiat para pagar.");
+				}
+				double equivalente = modelo.obtenerEquivalente(monto, fiat, moneda);
+				vista.setEquivalente(equivalente);
+				
+			} catch (IllegalArgumentException ex) {
+	            vista.mostrarMensajeError(ex.getMessage());
+			}
+		}
+	}
+	
+	class ConfirmarListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			try {
+				
+				double monto = vista.getCantidad();
+				String fiat = vista.obtenerItem();
+				
+				if (vista.obtenerItem() == null) {
+				    throw new IllegalArgumentException("Debe seleccionar una moneda fiat para pagar.");
+				}
+	
+				if( modelo.comprarCripto(monto, fiat, user ,moneda)) {
+					vista.mostrarMensaje("La compra fue realizada con éxito.");
+					new CotizacionesControlador(modeloCot, vistaCot, user);
+					vistaCot.setVisible(true); //se abre la ventana de cotizaciones
+					vista.dispose();			//se cierra la ventana de compra
+				}
+				else {
+					vista.mostrarMensajeError("Ocurrió un error en la compra.");
+				}
+				
+			} catch (IllegalArgumentException ex) {
+	            vista.mostrarMensajeError(ex.getMessage());
+			}
+		}
+	}
 }

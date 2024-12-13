@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,9 @@ public class TransaccionModelo {
 		List <String> transac = new ArrayList();
 		for (Transaccion transaccion : transacciones) {
 	   		if(transaccion.getIDUsuario()==user.getID()) {
-	   			transac.add(transaccion.getFechaHora()+" "+transaccion.getResumen());
+	   			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+				String fechaFormateada = transaccion.getFechaHora().format(formatter);   			
+	   			transac.add(fechaFormateada+" "+transaccion.getResumen());
 	   		}
 		}
 		return transac;

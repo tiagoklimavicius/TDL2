@@ -93,4 +93,28 @@ public class ActivoDAOImpl implements ActivoDAO {
         }
         return activo;
     }
+    
+    @Override
+    public Activo obtenerPorUsuarioYMoneda(int IDUsuario, int IDMoneda) {
+        String sql = "SELECT * FROM ACTIVO WHERE ID_USUARIO = ? AND ID_MONEDA = ?";
+        Connection connection = ConexionBD.getConnection();
+        Activo activo = null;
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, IDUsuario);
+            pstmt.setInt(2, IDMoneda);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    activo = new Activo();
+                    activo.setID(rs.getInt("ID"));
+                    activo.setCantidad(rs.getDouble("CANTIDAD"));
+                    activo.setIDUsuario(rs.getInt("ID_USUARIO"));
+                    activo.setIDMoneda(rs.getInt("ID_MONEDA"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        return activo;
+    }
 }
