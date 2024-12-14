@@ -3,10 +3,12 @@ package Controlador;
 import Entidad.Usuario;
 import Modelo.BalanceModelo;
 import Modelo.CotizacionesModelo;
+import Modelo.FondosModelo;
 import Modelo.LoginModelo;
 import Modelo.TransaccionModelo;
 import Vista.BalanceVista;
 import Vista.CotizacionesVista;
+import Vista.FondosVista;
 import Vista.LoginVista;
 import Vista.TransaccionVista;
 
@@ -19,6 +21,8 @@ public class BalanceControlador {
 	private LoginVista vistaLog;
 	private TransaccionModelo modeloTran;
 	private TransaccionVista vistaTran;
+	private FondosModelo modeloFon;
+	private FondosVista vistaFon;
 	private Usuario user;
 	
 	
@@ -36,6 +40,9 @@ public class BalanceControlador {
 		
 		modeloTran = new TransaccionModelo();
 		vistaTran = new TransaccionVista();
+		
+		modeloFon = new FondosModelo();
+		vistaFon = new FondosVista();
 		
 		
 
@@ -74,6 +81,13 @@ public class BalanceControlador {
 			vista.dispose();			//se cierra la ventana de balances
 		});
 		
+		
+		//asignar boton de ingresar fondos
+		this.vista.getBtnFondos().addActionListener(e -> {
+			new FondosControlador(modeloFon, vistaFon ,user);
+			vistaFon.setVisible(true); //se abre la ventana de ingresar fondos
+			vista.dispose();			//se cierra la ventana de balances
+		});
 		
 		//poner nombre de usuario
 		this.vista.setNombreUsuario(modelo.buscarNombre(user));

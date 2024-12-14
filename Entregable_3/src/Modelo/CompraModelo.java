@@ -25,7 +25,7 @@ public class CompraModelo {
 	   			Moneda moneda = monedaDAO.obtener(activo.getIDMoneda());
 	   			if(moneda.getTipo().equals("F")) {
 	   				//si la moneda a la que corresponde el activo es una de tipo fiat se agrega a la lista
-	   				act.add(moneda.getNombre());
+	   				act.add(moneda.getNomenclatura());
 	   			}
 	   		}
 		}

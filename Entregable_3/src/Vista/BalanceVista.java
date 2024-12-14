@@ -33,6 +33,7 @@ public class BalanceVista extends JFrame {
 	private JButton btnCripto;
 	private JButton btnTransacciones;
 	private JButton btnCotizaciones;
+	private JButton btnFondos;
 	/**
 	 * Launch the application.
 	 */
@@ -133,6 +134,11 @@ public class BalanceVista extends JFrame {
 		btnCotizaciones = new JButton("Cotizaciones");
 		btnCotizaciones.setBounds(257, 373, 125, 50);
 		contentPane.add(btnCotizaciones);
+		
+		btnFondos = new JButton("Ingresar Fondos");
+		btnFondos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnFondos.setBounds(340, 84, 164, 23);
+		contentPane.add(btnFondos);
 	}
 	
 	//getter y setter
@@ -174,6 +180,10 @@ public class BalanceVista extends JFrame {
 		return btnCotizaciones;
 	}
 	
+	public JButton getBtnFondos() {
+		return btnFondos;
+	}
+	
 	public void mostrarMensajeError(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
 	}
@@ -181,6 +191,4 @@ public class BalanceVista extends JFrame {
 	public void mostrarMensaje(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje, "Éxito", JOptionPane.INFORMATION_MESSAGE);
 	}
-	
-	
 }
