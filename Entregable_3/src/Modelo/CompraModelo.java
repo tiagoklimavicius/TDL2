@@ -58,8 +58,6 @@ public class CompraModelo {
 		
 		ActivoDAO activoDAO = new ActivoDAOImpl();
 		Activo activoFiat =  activoDAO.obtenerPorUsuarioYMoneda(user.getID(), monedaFiat.getID());		//LO QUE DEVUELVE ESTO ES EL ACTIVO FIAT QUE POSEE EL USUARIO DE LA MONEDA FIAT SELECCIONADA
-		System.out.println("CANTIDAD ACTIVO FIAT: "+activoFiat.getCantidad());
-		
 		
 		
 		//necesito verificar que estos dos existan, donde no existan el resultado de estos dos es null
@@ -83,23 +81,15 @@ public class CompraModelo {
 						monedaDAO.actualizar(moneda);														//actualizo el valor en la tabla
 						activoFiat.setCantidad(activoFiat.getCantidad() - monto);							//actualizo la cantidad de fiat 
 						activoDAO.actualizar(activoFiat);													//actualizo en la tabla de activos
-						System.out.println("CANTIDAD DE ACTIVO FIAT: "+activoFiat.getCantidad());
-						System.out.println("ID DE LA MONEDA: "+moneda.getID()+"ID DEL USUARIO: "+user.getID()+"ID DE LA MONEDA/ACTIVO: ");
 						check=true;
 									
 					}
 					else {			//SI ES QUE EL ACTIVO YA EXISTE SOLO RESTA ACTUALIZARLO
-						System.out.println("CANTIDAD DEL ACTIVO CRIPTO: "+activoCripto.getCantidad());
 						activoCripto.setCantidad(activoCripto.getCantidad() + equivalente);				//Incremendo la cantidad del activo
-						System.out.println("CANTIDAD DEL ACTIVO CRIPTO ACTUALIZADA: "+activoCripto.getCantidad());
 						activoDAO.actualizar(activoCripto);												//actualizo en la tabla los datos del activo
-						System.out.println("STOCK DE LA MONEDA CRIPTO: "+moneda.getStock());
 						moneda.setStock(moneda.getStock() - equivalente);								//actualizo el stock de la cripto
-						System.out.println("STOCK DE LA MONEDA CRIPTO ACTUALIZADO: "+moneda.getStock());
 						monedaDAO.actualizar(moneda);													//actualizo el valor en la tabla
-						System.out.println("CANTIDAD DEL ACTIVO FIAT: "+activoCripto.getCantidad());
 						activoFiat.setCantidad(activoFiat.getCantidad() - monto);						//actualizo la cantidad de fiat 
-						System.out.println("CANTIDAD DEL ACTIVO FIAT ACTUALIZADO: "+activoCripto.getCantidad());
 						activoDAO.actualizar(activoFiat);												//actualizo en la tabla de activos
 						check=true;
 						

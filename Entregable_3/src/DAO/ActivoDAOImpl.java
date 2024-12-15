@@ -66,13 +66,6 @@ public class ActivoDAOImpl implements ActivoDAO {
             pstmt.setDouble(3, activo.getCantidad());
             pstmt.setInt(4, activo.getID()); 
             pstmt.executeUpdate();
-            
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("La actualización fue exitosa.");
-            } else {
-                System.out.println("No se encontraron registros para actualizar.");
-            }
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             e.printStackTrace();

@@ -134,27 +134,8 @@ public class BalanceVista extends JFrame {
 
         // Agregar la tabla al JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(48, 129, 400, 150);
+        scrollPane.setBounds(48, 129, 400, 200);
         contentPane.add(scrollPane);
-
-    // Método para llenar la tabla
- /*  private void llenarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-        modelo.addRow(new Object[]{
-                new ImageIcon("src/Media/pesosarg.png"), // Imagen
-                "Pesos Argentinos", // Nombre
-                "10000" // Precio
-        });
-        modelo.addRow(new Object[]{
-                resizedIcon,
-                "Bitcoin",
-                "1"
-        });
-        modelo.addRow(new Object[]{
-                new ImageIcon("src/Media/dogecoin.png"),
-                "Dogecoin",
-                "300"
-        });				*/
 		
 		btnExportar = new JButton("Exportar como CSV");
 		btnExportar.setBounds(170, 339, 141, 23);
