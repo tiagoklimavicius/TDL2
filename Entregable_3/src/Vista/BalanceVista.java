@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -61,7 +62,6 @@ public class BalanceVista extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		setTitle("ACE WALLET");
 		setResizable(false);
@@ -71,60 +71,101 @@ public class BalanceVista extends JFrame {
 		Image img = iconoUsuario.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		iconoUsuario = new ImageIcon(img);
 		contentPane.setLayout(null);
+		contentPane.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario", iconoUsuario, JLabel.LEFT);
 		lblUsuario.setBounds(354, 5, 50, 50);
 		contentPane.add(lblUsuario);
 		
 		lblNombreUsuario = new JLabel("");   
+		lblNombreUsuario.setBounds(440, 11, 46, 14);
 		lblNombreUsuario.setForeground(Color.WHITE);
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombreUsuario.setBounds(440, 11, 46, 14);
 		contentPane.add(lblNombreUsuario);
 		
 		btnDatosPrueba = new JButton("Generar Datos de Prueba");
-		btnDatosPrueba.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnDatosPrueba.setBounds(340, 53, 164, 29);
+		btnDatosPrueba.setFont(new Font("Tahoma", Font.BOLD, 10));
 		contentPane.add(btnDatosPrueba);
 		
 		btnCerrar = new JButton("Cerrar sesión");
-		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnCerrar.setBounds(415, 28, 89, 23);
+		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		contentPane.add(btnCerrar);
 		
 		lblBalance = new JLabel("BALANCE ");
+		lblBalance.setBounds(25, 11, 200, 60);
 		lblBalance.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblBalance.setForeground(Color.WHITE);
 		lblBalance.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBalance.setBounds(40, 100, 200, 60);
 		contentPane.add(lblBalance);
 		
 		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.BOLD, 12));
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
+			new Object[][] {}, //vacio el inicio
+			new String[] { "Imagen", "Nombre", "Precio" } //nombres de las columnas"
+			) {
+			
+			  public boolean isCellEditable(int row, int column) {
+			        // Todas las celdas son no editables
+			        return false;
+			    }
+			/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+			@Override
+			public Class<?> getColumnClass(int columnIndex){
+				//primera columna es de tipo ImageIcon
+				if(columnIndex == 0) {
+					return ImageIcon.class;
+				}
+				return String.class; //ya que las demas columnas son texto
 			}
-		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(55);
-		table.setBounds(50, 171, 284, 64);
-		contentPane.add(table);
+		});
+		
+		// Ajustar ancho de las columnas
+        table.getColumnModel().getColumn(0).setPreferredWidth(20); // Imagen
+        table.getColumnModel().getColumn(1).setPreferredWidth(150); // Nombre
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);  // Precio
+        table.setRowHeight(60); // Altura para las imágenes
+
+        // Agregar la tabla al JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(48, 129, 400, 150);
+        contentPane.add(scrollPane);
+
+    // Método para llenar la tabla
+ /*  private void llenarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+        modelo.addRow(new Object[]{
+                new ImageIcon("src/Media/pesosarg.png"), // Imagen
+                "Pesos Argentinos", // Nombre
+                "10000" // Precio
+        });
+        modelo.addRow(new Object[]{
+                resizedIcon,
+                "Bitcoin",
+                "1"
+        });
+        modelo.addRow(new Object[]{
+                new ImageIcon("src/Media/dogecoin.png"),
+                "Dogecoin",
+                "300"
+        });				*/
 		
 		btnExportar = new JButton("Exportar como CSV");
-		btnExportar.setBounds(136, 265, 141, 23);
+		btnExportar.setBounds(170, 339, 141, 23);
 		contentPane.add(btnExportar);
 		
 		btnMonto = new JButton("Monto");
-		btnMonto.setBounds(237, 148, 89, 23);
+		btnMonto.setBounds(235, 19, 89, 23);
 		contentPane.add(btnMonto);
 		
 		btnCripto = new JButton("Cripto");
-		btnCripto.setBounds(136, 148, 89, 23);
+		btnCripto.setBounds(136, 19, 89, 23);
 		contentPane.add(btnCripto);
 		
 		btnTransacciones = new JButton("Mis Operaciones");
@@ -136,14 +177,30 @@ public class BalanceVista extends JFrame {
 		contentPane.add(btnCotizaciones);
 		
 		btnFondos = new JButton("Ingresar Fondos");
-		btnFondos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnFondos.setBounds(340, 84, 164, 23);
+		btnFondos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(btnFondos);
 	}
 	
 	//getter y setter
 	
+	public void llenarTabla(String icon, String nombre, String precio) {
+		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+        modelo.addRow(new Object[]{
+                resizeImage(icon), // Imagen
+                nombre, // Nombre
+                precio // Precio
+        });
+	}
 	
+    public ImageIcon resizeImage(String nombreArchivo) {
+    	ImageIcon originalIcon = new ImageIcon("src/Media/"+nombreArchivo);
+    	Image resizedImage = originalIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+    	ImageIcon resizedIcon = new ImageIcon(resizedImage);
+    	return resizedIcon;
+    }
+  
+    
 	public void setNombreUsuario(String nombre) {
 		lblNombreUsuario.setText(nombre);
 	}

@@ -10,7 +10,7 @@ public class Activo implements Comparable<Activo> {
 
     }
 
-    public Activo(double cantidad, int IDMoneda, int IDUsuario) {         //para el main
+    public Activo(double cantidad, int IDUsuario, int IDMoneda) {         //para el main
         this.cantidad = cantidad;
         this.IDMoneda=IDMoneda;
         this.IDUsuario=IDUsuario;

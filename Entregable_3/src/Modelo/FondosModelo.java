@@ -37,7 +37,7 @@ public class FondosModelo {
 		Activo activoF = activoDAO.obtenerPorUsuarioYMoneda(user.getID(), moneda.getID());
 		if(activoF == null) {
 			//si el activo fiat es null significa que el usuario aun no posee el activo, por lo que debo crearlo
-			activoDAO.crear(new Activo(monto, moneda.getID(), user.getID()));
+			activoDAO.crear(new Activo(monto, user.getID() , moneda.getID()));
 			//ya se creo el activo con el valor seleccionado para ingresar.
 			check = true;
 		}

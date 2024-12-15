@@ -1,6 +1,8 @@
 package Controlador;
 
-import Entidad.Usuario;
+import java.util.List;
+
+import Entidad.*;
 import Modelo.BalanceModelo;
 import Modelo.CotizacionesModelo;
 import Modelo.FondosModelo;
@@ -44,6 +46,25 @@ public class BalanceControlador {
 		modeloFon = new FondosModelo();
 		vistaFon = new FondosVista();
 		
+		
+		// Obtener los datos de los activos del usuario.
+		List<Activo> activos = modelo.obtenerActivos(user);
+		//una vez tengo los activos, para cada uno tengo que agregarlo a la tabla de BALANCE
+		for (Activo activo : activos) {
+			//para cada uno tengo que obtener su ImageIcon, Nombre y Precio
+			String imagen = modelo.obtenerImagen(activo);						//obtengo la ruta de donde esta la imagen
+			String nombre = modelo.obtenerNombre(activo);						//obtengo el nombre del activo
+			String precio = modelo.obtenerPrecio(activo);						//obtengo el monto que poseo de tal activo 
+			this.vista.llenarTabla(imagen, nombre, precio);						//agrego a la tabla este activo
+		}
+		
+		
+		
+		
+		
+		
+		
+	//	vista.llenarTabla();
 		
 
 		//asignar boton de cerrar sesion
@@ -92,5 +113,9 @@ public class BalanceControlador {
 		//poner nombre de usuario
 		this.vista.setNombreUsuario(modelo.buscarNombre(user));
 	}
+	
+	
+	
+	
 }
 

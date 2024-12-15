@@ -52,11 +52,13 @@ public class CompraModelo {
 		
 		MonedaDAO monedaDAO = new MonedaDAOImpl();
 		Moneda monedaFiat = monedaDAO.obtener(fiat);
+		System.out.println("MONEDA FIAT: "+monedaFiat.getNomenclatura());
 		
 		//Obtengo la instancia moneda de la moneda fiat (BUSCANDO POR NOMENCLATURA)
 		
 		ActivoDAO activoDAO = new ActivoDAOImpl();
 		Activo activoFiat =  activoDAO.obtenerPorUsuarioYMoneda(user.getID(), monedaFiat.getID());		//LO QUE DEVUELVE ESTO ES EL ACTIVO FIAT QUE POSEE EL USUARIO DE LA MONEDA FIAT SELECCIONADA
+		System.out.println("CANTIDAD ACTIVO FIAT: "+activoFiat.getCantidad());
 		
 		
 		
@@ -64,7 +66,7 @@ public class CompraModelo {
 		
 		if(activoFiat != null) {
 			//SI EL USUARIO POSEE EL ACTIVO FIAT CONTINUO (PARA ESTE CASO YA DEBERIA SER OBLIGATORIO QUE LO POSEA IGUALMENTE,YA QUE NO DEBERIA PERMITIRLE USARLO SINO)
-			if(activoFiat.getCantidad() <= monto) {
+			if(activoFiat.getCantidad() >= monto) {
 				//SI PASO ESTE IF ES QUE POSEO LA CANTIDAD SUFICIENTE PARA REALIZAR LA COMPRA
 				if(moneda.getStock() >= equivalente) {
 					//SI PASO ESTE IF POSEO SUFICIENTE CANTIDAD DE LA MONEDA EN LA WALLET PARA REALIZAR LA COMPRA
@@ -73,23 +75,31 @@ public class CompraModelo {
 					//debo chequear si poseo el activo cripto y si es que no lo instancio.
 					
 					Activo activoCripto = activoDAO.obtenerPorUsuarioYMoneda(user.getID(), moneda.getID());			// ESTO DEVUELVE EL ACTIVO QUE POSEE EL USUARIO DE LA MONEDA CRIPTO A COMPRAR
+					
 					if( activoCripto == null) {   
-			
 						//dentro de este if es que el activo no existe por lo tanto lo vamos a crear.
 						activoDAO.crear(new Activo(equivalente, user.getID(), moneda.getID()));             //creo el activo relacionandolo con el usuario y la moneda a comprar
 						moneda.setStock(moneda.getStock() - equivalente);									//actualizo el stock de la cripto
 						monedaDAO.actualizar(moneda);														//actualizo el valor en la tabla
 						activoFiat.setCantidad(activoFiat.getCantidad() - monto);							//actualizo la cantidad de fiat 
 						activoDAO.actualizar(activoFiat);													//actualizo en la tabla de activos
+						System.out.println("CANTIDAD DE ACTIVO FIAT: "+activoFiat.getCantidad());
+						System.out.println("ID DE LA MONEDA: "+moneda.getID()+"ID DEL USUARIO: "+user.getID()+"ID DE LA MONEDA/ACTIVO: ");
 						check=true;
 									
 					}
 					else {			//SI ES QUE EL ACTIVO YA EXISTE SOLO RESTA ACTUALIZARLO
+						System.out.println("CANTIDAD DEL ACTIVO CRIPTO: "+activoCripto.getCantidad());
 						activoCripto.setCantidad(activoCripto.getCantidad() + equivalente);				//Incremendo la cantidad del activo
+						System.out.println("CANTIDAD DEL ACTIVO CRIPTO ACTUALIZADA: "+activoCripto.getCantidad());
 						activoDAO.actualizar(activoCripto);												//actualizo en la tabla los datos del activo
+						System.out.println("STOCK DE LA MONEDA CRIPTO: "+moneda.getStock());
 						moneda.setStock(moneda.getStock() - equivalente);								//actualizo el stock de la cripto
+						System.out.println("STOCK DE LA MONEDA CRIPTO ACTUALIZADO: "+moneda.getStock());
 						monedaDAO.actualizar(moneda);													//actualizo el valor en la tabla
+						System.out.println("CANTIDAD DEL ACTIVO FIAT: "+activoCripto.getCantidad());
 						activoFiat.setCantidad(activoFiat.getCantidad() - monto);						//actualizo la cantidad de fiat 
+						System.out.println("CANTIDAD DEL ACTIVO FIAT ACTUALIZADO: "+activoCripto.getCantidad());
 						activoDAO.actualizar(activoFiat);												//actualizo en la tabla de activos
 						check=true;
 						
@@ -98,11 +108,17 @@ public class CompraModelo {
 						TransaccionDAO transaccionDAO = new TransaccionDAOImpl();
 						transaccionDAO.crear(new Transaccion(resumen, LocalDateTime.now(), user.getID()));				//Creo la transaccion en la DB
 				}
-				//else {} NO HAY STOCK SUFICIENTE PARA REALIZAR LA COMPRA
+				else {
+					System.out.println("NO HAY STOCK SUFICIENTE PARA REALIZAR LA COMPRA");
+				} 
 			}
-			//else{} NO HAY CANTIDAD DE FIAT SUFICIENTE PARA LA COMPRA
+			else{
+			System.out.println("NO HAY CANTIDAD DE FIAT SUFICIENTE PARA LA COMPRA. CANTIDAD DE FIAT: "+activoFiat.getCantidad()+"CANTIDAD A COMPRAR: "+monto);
+			} 
 		}
-		//else {} EL USUARIO NO POSEE EL ACTIVO FIAT (NO DEBERIA PASAR)
+		else {
+			System.out.println("EL USUARIO NO POSEE EL ACTIVO FIAT (NO DEBERIA PASAR)");
+		} 
 		return check;
 	}
 }

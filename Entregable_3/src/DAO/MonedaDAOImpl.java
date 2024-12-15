@@ -66,6 +66,7 @@ public class MonedaDAOImpl implements MonedaDAO {
             pstmt.setDouble(5, moneda.getVolatilidad());
             pstmt.setDouble(6, moneda.getStock());
             pstmt.setString(7, moneda.getNombreIcono());
+            pstmt.setInt(8, moneda.getID()); 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

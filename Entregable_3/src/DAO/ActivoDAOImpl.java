@@ -58,13 +58,21 @@ public class ActivoDAOImpl implements ActivoDAO {
 
     @Override
     public void actualizar(Activo activo) {
-        String sql = "UPDATE ACTIVO SET CANTIDAD = ?, ID_USUARIO = ?, ID_MONEDA = ? WHERE ID = ?";
+        String sql = "UPDATE ACTIVO SET ID_USUARIO = ?, ID_MONEDA = ?, CANTIDAD = ? WHERE ID = ?";
         Connection connection = ConexionBD.getConnection();
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setDouble(1, activo.getCantidad());
-            pstmt.setInt(2, activo.getIDUsuario());
-            pstmt.setInt(3, activo.getIDMoneda());
+            pstmt.setInt(1, activo.getIDUsuario());
+            pstmt.setInt(2, activo.getIDMoneda());
+            pstmt.setDouble(3, activo.getCantidad());
+            pstmt.setInt(4, activo.getID()); 
             pstmt.executeUpdate();
+            
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("La actualización fue exitosa.");
+            } else {
+                System.out.println("No se encontraron registros para actualizar.");
+            }
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             e.printStackTrace();
