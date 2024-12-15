@@ -38,6 +38,19 @@ public class CotizacionesControlador {
 		vistaCom = new CompraVista();
 		
 		
+		//setear precios para cada moneda
+		double btc =modelo.obtenerMoneda("BTC").getValorDolar();
+		double eth =modelo.obtenerMoneda("ETH").getValorDolar();
+		double usdc =modelo.obtenerMoneda("USDC").getValorDolar();
+		double usdt =modelo.obtenerMoneda("USDT").getValorDolar();
+		double doge =modelo.obtenerMoneda("DOGE").getValorDolar();
+		vista.setPrecios(btc, eth, usdc, usdt, doge);
+		
+		
+		
+		
+		
+		
 		this.vista.getBtnVolver().addActionListener(e -> {
 			new BalanceControlador(modeloBal, vistaBal, user);
 			vistaBal.setVisible(true); //se abre la ventana de balances

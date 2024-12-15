@@ -72,7 +72,7 @@ public class FondosControlador {
 				}
 	
 				if( modelo.comprarFiat(monto, fiat, user)) {
-					vista.mostrarMensaje("Será rederigido a la aplicación del metodo de pago seleccionado:.");
+					vista.mostrarMensaje("Será rederigido a la aplicación del metodo de pago seleccionado");
 					vista.mostrarMensaje("Transacción exitosa");
 					new BalanceControlador(modeloBal, vistaBal, user);
 					vistaBal.setVisible(true); //se abre la ventana de cotizaciones

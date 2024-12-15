@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Entidad.Moneda;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
@@ -33,6 +36,8 @@ public class CompraVista extends JFrame {
 	private JButton btnConfirmar;
 	private JButton btnCancelar;
 	private JLabel lblCriptoImagen;
+	private JLabel lblNombreUsuario;
+	private JButton btnCerrar;
 
 	/**
 	 * Launch the application.
@@ -68,7 +73,7 @@ public class CompraVista extends JFrame {
 		
 												
 		lblComprarCripto = new JLabel("");
-		lblComprarCripto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblComprarCripto.setHorizontalAlignment(SwingConstants.LEFT);
 		lblComprarCripto.setForeground(Color.WHITE);
 		lblComprarCripto.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblComprarCripto.setBounds(80, 11, 207, 49);
@@ -114,8 +119,8 @@ public class CompraVista extends JFrame {
 		lblEquivalente = new JLabel("");
 		lblEquivalente.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblEquivalente.setForeground(Color.WHITE);
-		lblEquivalente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEquivalente.setBounds(89, 259, 140, 29);
+		lblEquivalente.setHorizontalAlignment(SwingConstants.LEFT);
+		lblEquivalente.setBounds(56, 260, 303, 29);
 		contentPane.add(lblEquivalente);
 		
 		btnConfirmar = new JButton("CONFIRMAR");
@@ -137,9 +142,38 @@ public class CompraVista extends JFrame {
 		lblCriptoImagen = new JLabel("", JLabel.LEFT);
 		lblCriptoImagen.setBounds(10, 11, 50, 50);
 		contentPane.add(lblCriptoImagen);
+		
+		ImageIcon iconoUsuario = new ImageIcon("src/Media/usuario.png");
+		Image img = iconoUsuario.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		iconoUsuario = new ImageIcon(img);
+		contentPane.setLayout(null);
+		
+		JLabel lblUsuario = new JLabel("Usuario", iconoUsuario, JLabel.LEFT);
+		lblUsuario.setBounds(354, 5, 50, 50);
+		contentPane.add(lblUsuario);
+		
+		lblNombreUsuario = new JLabel("");   
+		lblNombreUsuario.setForeground(Color.WHITE);
+		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNombreUsuario.setBounds(440, 11, 46, 14);
+		contentPane.add(lblNombreUsuario);
+		
+		btnCerrar = new JButton("Cerrar sesión");
+		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 8));
+		btnCerrar.setBounds(415, 28, 89, 23);
+		contentPane.add(btnCerrar);
 	}
 	
 	//getter y setter
+	
+	public void setNombreUsuario(String nombre) {
+		lblNombreUsuario.setText(nombre);
+	}
+	
+	public JButton getBtnCerrar() {
+		return btnCerrar;
+	}
+	
 	
 	public void setIconoCripto(String nombreArchivo) {
 		try {
@@ -178,6 +212,7 @@ public class CompraVista extends JFrame {
 	
 	public void setPrecio(double precio) {
 		lblPrecioCripto.setText("$" + String.valueOf(precio));
+		
 	}
 	
 	public void agregarItem(String fiat) {
@@ -192,8 +227,9 @@ public class CompraVista extends JFrame {
 		return btnConvertir;
 	}
 	
-	public void setEquivalente(double equiv) {
-		lblEquivalente.setText(String.valueOf(equiv));
+	public void setEquivalente(double equiv, Moneda moneda) {
+		lblEquivalente.setText("EQUIVALE A "+String.format("%.8f", equiv)+" "+moneda.getNomenclatura());
+
 	}
 	
 	public double getEquivalente() {

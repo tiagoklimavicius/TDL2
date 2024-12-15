@@ -52,7 +52,6 @@ public class CompraModelo {
 		
 		MonedaDAO monedaDAO = new MonedaDAOImpl();
 		Moneda monedaFiat = monedaDAO.obtener(fiat);
-		System.out.println("MONEDA FIAT: "+monedaFiat.getNomenclatura());
 		
 		//Obtengo la instancia moneda de la moneda fiat (BUSCANDO POR NOMENCLATURA)
 		
@@ -110,5 +109,11 @@ public class CompraModelo {
 			System.out.println("EL USUARIO NO POSEE EL ACTIVO FIAT (NO DEBERIA PASAR)");
 		} 
 		return check;
+	}
+	
+	public String buscarNombre(Usuario user) {
+		PersonaDAO personaDAO = new PersonaDAOImpl();
+		String nombre = personaDAO.obtener(user.getIDPersona()).getNombres();
+		return nombre;
 	}
 }

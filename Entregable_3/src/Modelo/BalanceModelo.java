@@ -1,7 +1,14 @@
 package Modelo;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import Entidad.*;
 
@@ -52,5 +59,44 @@ public class BalanceModelo {
 		Moneda moneda = monedaDAO.obtener(activo.getIDMoneda());
 		double precio = moneda.getValorDolar() * activo.getCantidad();
 		return precio;
+	}
+	
+	public boolean exportarCSV(String nombreArchivo, JTable tabla) {
+		try (FileWriter fw = new FileWriter(nombreArchivo);
+		         BufferedWriter bw = new BufferedWriter(fw)) {
+		        
+		        // Obtener el modelo de la tabla
+		        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+		        
+		        // Escribir los nombres de las columnas
+		        for (int i = 0; i < modelo.getColumnCount(); i++) {
+		            bw.write(modelo.getColumnName(i));
+		            if (i < modelo.getColumnCount() - 1) {
+		                bw.write(","); // Separador de columnas
+		            }
+		        }
+		        bw.newLine(); // Nueva línea después de los encabezados
+
+		        // Escribir las filas
+		        for (int i = 0; i < modelo.getRowCount(); i++) {
+		            for (int j = 0; j < modelo.getColumnCount(); j++) {
+		                Object valor = modelo.getValueAt(i, j);
+		                if (valor instanceof ImageIcon) {
+		                    bw.write("Imagen"); // Opcional: indicar que es una imagen
+		                } else {
+		                    bw.write(valor.toString());
+		                }
+		                if (j < modelo.getColumnCount() - 1) {
+		                    bw.write(","); // Separador de columnas
+		                }
+		            }
+		            bw.newLine(); // Nueva línea después de cada fila
+		        }
+
+		        return true;
+		    } catch (IOException ex) {
+		        return false;
+		    }
+		
 	}
 }

@@ -32,6 +32,7 @@ public class LoginVista extends JFrame{
 	private JPasswordField txtContraseña;
 	private JButton btnIngresar;
 	private JButton btnRegistrarse;
+	private JLabel lblAun;
 
 	/**
 	 * Launch the application.
@@ -69,8 +70,8 @@ public class LoginVista extends JFrame{
 		JLabel lblLogin = new JLabel("INICIAR SESIÓN");
 		lblLogin.setForeground(Color.WHITE);
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setFont(new Font("Yu Gothic Medium", Font.BOLD, 20));
-		lblLogin.setBounds(131, 6, 168, 59);
+		lblLogin.setFont(new Font("Yu Gothic Medium", Font.BOLD, 24));
+		lblLogin.setBounds(0, 0, 514, 65);
 		contentPane.add(lblLogin);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -78,35 +79,42 @@ public class LoginVista extends JFrame{
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblEmail.setBackground(Color.WHITE);
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmail.setBounds(24, 76, 72, 31);
+		lblEmail.setBounds(37, 73, 72, 31);
 		contentPane.add(lblEmail);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(131, 76, 204, 28);
+		txtEmail.setBounds(157, 76, 204, 28);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
 		JLabel lblContraseña = new JLabel("Contraseña:");
 		lblContraseña.setForeground(Color.WHITE);
 		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblContraseña.setBounds(24, 122, 85, 39);
+		lblContraseña.setBounds(34, 122, 85, 39);
 		contentPane.add(lblContraseña);
 		
 		txtContraseña = new JPasswordField();
 		txtContraseña.setColumns(10);
-		txtContraseña.setBounds(131, 129, 204, 28);
+		txtContraseña.setBounds(157, 129, 204, 28);
 		contentPane.add(txtContraseña);
 		
 		btnIngresar = new JButton("INGRESAR");
 		btnIngresar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnIngresar.setBounds(157, 183, 130, 23);
+		btnIngresar.setBounds(177, 212, 130, 23);
 		contentPane.add(btnIngresar);
 		
 		btnRegistrarse = new JButton("REGISTRARSE");
-		btnRegistrarse.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnRegistrarse.setBackground(new Color(240, 240, 240));
-		btnRegistrarse.setBounds(157, 247, 130, 23);
+		btnRegistrarse.setForeground(Color.WHITE);
+		btnRegistrarse.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnRegistrarse.setBackground(Color.DARK_GRAY);
+		btnRegistrarse.setBounds(268, 427, 157, 23);
 		contentPane.add(btnRegistrarse);
+		
+		lblAun = new JLabel("¿Aún no es usuario?");
+		lblAun.setForeground(Color.WHITE);
+		lblAun.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAun.setBounds(105, 429, 168, 14);
+		contentPane.add(lblAun);
 		
 	}
 	// Getter y Setter para btnIngresar

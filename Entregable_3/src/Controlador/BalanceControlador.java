@@ -54,17 +54,14 @@ public class BalanceControlador {
 			//para cada uno tengo que obtener su ImageIcon, Nombre y Precio
 			String imagen = modelo.obtenerImagen(activo);						//obtengo la ruta de donde esta la imagen
 			String nombre = modelo.obtenerNombre(activo);						//obtengo el nombre del activo
-			double precio = modelo.obtenerPrecio(activo);						//obtengo el monto que poseo de tal activo 
-			this.vista.llenarTabla(imagen, nombre, precio);						//agrego a la tabla este activo
+			double precio = modelo.obtenerPrecio(activo);						//obtengo el monto que poseo de tal activo
+			double redondeado = Math.round(precio * 100000.0) / 100000.0;
+			this.vista.llenarTabla(imagen, nombre, redondeado);						//agrego a la tabla este activo
 		}
 		
 		
-		
-		
-		
-		
-		
-	//	vista.llenarTabla();
+		//setear el balance
+		vista.setBalance(vista.getBalance());
 		
 
 		//asignar boton de cerrar sesion
@@ -77,12 +74,17 @@ public class BalanceControlador {
 		});
 		
 		//asignar boton de generar datos de pruebas							GENERAR STOCK ALETORIO
-		
-		//asignar boton de ordenar por cripto								SORT ORDER
-			
-		//asignar boton de ordenar por monto								SORT ORDER
 			
 		//asignar boton de exportar por csv
+		
+		this.vista.getBtnExportar().addActionListener(e -> {								//esto exporta los datos a una tabla nombrada con el email del usuario y se almacena en el directorio que esta el proyecto
+			if(modelo.exportarCSV("tabla_"+user.getEmail()+".csv", vista.getTabla())) {
+				vista.mostrarMensaje("Datos exportados exitosamente a tabla_"+user.getEmail()+".csv");
+			}
+			else {
+				vista.mostrarMensajeError("Error al exportar los datos");
+			}
+		});
 		
 		//asignar boton de ir a mis operaciones
 		

@@ -20,6 +20,8 @@ public class CompraControlador {
 	private CompraVista vista;
 	private CotizacionesModelo modeloCot;
 	private CotizacionesVista vistaCot;
+	private LoginModelo modeloLog;
+	private LoginVista vistaLog;
 	private Usuario user;
 	private Moneda moneda;
 	
@@ -31,6 +33,9 @@ public class CompraControlador {
 		
 		modeloCot = new CotizacionesModelo();
 		vistaCot = new CotizacionesVista();
+		
+		modeloLog = new LoginModelo();
+		vistaLog = new LoginVista();
 		
 		
 		//configurar todo el modelo de la compra utilizando la moneda recibida
@@ -60,7 +65,14 @@ public class CompraControlador {
 		
 		//antes de hacer la compra hay q calcular el btnEquivalente para poder mostrar el monto en pantalla
 		
-	
+		//poner nombre de usuario
+		this.vista.setNombreUsuario(modelo.buscarNombre(user));
+		
+		this.vista.getBtnCerrar().addActionListener(e -> {
+			new LoginControlador(modeloLog, vistaLog);
+			vistaLog.setVisible(true); //se abre la ventana de login
+			vista.dispose();			//se cierra la ventana de transacciones
+		});	
 			
 
 		
@@ -80,7 +92,7 @@ public class CompraControlador {
 				    throw new IllegalArgumentException("Debe seleccionar una moneda fiat para pagar.");
 				}
 				double equivalente = modelo.obtenerEquivalente(monto, fiat, moneda);
-				vista.setEquivalente(equivalente);
+				vista.setEquivalente(equivalente,moneda);
 				
 			} catch (IllegalArgumentException ex) {
 	            vista.mostrarMensajeError(ex.getMessage());

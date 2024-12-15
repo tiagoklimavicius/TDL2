@@ -28,7 +28,6 @@ public class BalanceVista extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JLabel lblNombreUsuario;
-	private JButton btnDatosPrueba;
 	private JButton btnCerrar;
 	private JLabel lblBalance;
 	private JButton btnExportar;
@@ -83,18 +82,13 @@ public class BalanceVista extends JFrame {
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblNombreUsuario);
 		
-		btnDatosPrueba = new JButton("Generar Datos de Prueba");
-		btnDatosPrueba.setBounds(340, 53, 164, 29);
-		btnDatosPrueba.setFont(new Font("Tahoma", Font.BOLD, 10));
-		contentPane.add(btnDatosPrueba);
-		
 		btnCerrar = new JButton("Cerrar sesión");
 		btnCerrar.setBounds(415, 28, 89, 23);
 		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		contentPane.add(btnCerrar);
 		
 		lblBalance = new JLabel("BALANCE ");
-		lblBalance.setBounds(25, 11, 200, 60);
+		lblBalance.setBounds(25, 11, 285, 60);
 		lblBalance.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblBalance.setForeground(Color.WHITE);
 		lblBalance.setHorizontalAlignment(SwingConstants.LEFT);
@@ -146,7 +140,7 @@ public class BalanceVista extends JFrame {
         
         // Agregar la tabla al JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(25, 129, 461, 226);
+        scrollPane.setBounds(25, 129, 463, 226);
         contentPane.add(scrollPane);
 		
 		btnExportar = new JButton("Exportar como CSV");
@@ -162,12 +156,32 @@ public class BalanceVista extends JFrame {
 		contentPane.add(btnCotizaciones);
 		
 		btnFondos = new JButton("Ingresar Fondos");
-		btnFondos.setBounds(340, 84, 164, 23);
+		btnFondos.setBounds(354, 52, 150, 23);
 		btnFondos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(btnFondos);
 	}
 	
 	//getter y setter
+	
+	public double getBalance() {
+	    double total = 0.0;
+	    DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+	    for (int i = 0; i < model.getRowCount(); i++) {
+	        Object value = model.getValueAt(i, 2);
+	         total += (Double) value; // Sumar el valor
+	    }
+	    return total;
+	}
+	
+	public void setBalance(double balance) {
+		lblBalance.setText("BALANCE: $"+String.format("%.2f", balance));
+	}
+	
+	
+	public JTable getTabla() {
+		return table;
+	}
 	
 	public void llenarTabla(String icon, String nombre, double precio) {
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
@@ -190,16 +204,8 @@ public class BalanceVista extends JFrame {
 		lblNombreUsuario.setText(nombre);
 	}
 	
-	public JButton getBtnDatosPrueba() {
-		return btnDatosPrueba;
-	}
-	
 	public JButton getBtnCerrar() {
 		return btnCerrar;
-	}
-	
-	public void setBalance(String balance) {
-		lblBalance.setText(balance);
 	}
 	
 	public JButton getBtnExportar() {

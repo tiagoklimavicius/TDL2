@@ -24,6 +24,13 @@ public class RegistroControlador {
 	//	
 		
 		
+		this.vista.getBtnIniciar().addActionListener(e -> {
+			new LoginControlador(modeloLog, vistaLog);
+			vistaLog.setVisible(true); //se abre la ventana de login
+			vista.dispose();			//se cierra la ventana de registro
+		});
+		
+		
 		//asignar el controlador al boton de confirmar
 		this.vista.getBtnConfirmar().addActionListener(new ConfirmarListener());
 		

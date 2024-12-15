@@ -27,6 +27,12 @@ public class CotizacionesVista extends JFrame {
 	private JButton btnComprarUsdc;
 	private JButton btnComprarUsdt;
 	private JButton btnComprarDoge;
+	private JLabel 	lblPrecioBtc;
+	private JLabel	lblPrecioEth;
+	private JLabel	lblPrecioUsdc;
+	private JLabel 	lblPrecioUsdt;
+	private JLabel	lblPrecioDoge;
+	private JButton btnStock;
 
 	/**
 	 * Launch the application.
@@ -65,14 +71,14 @@ public class CotizacionesVista extends JFrame {
 		lblCripto.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblCripto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCripto.setForeground(Color.WHITE);
-		lblCripto.setBounds(58, 40, 90, 30);
+		lblCripto.setBounds(40, 40, 90, 30);
 		contentPane.add(lblCripto);
 		
 		JLabel lblPrecio = new JLabel("ÚLTIMO PRECIO");
 		lblPrecio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrecio.setForeground(Color.WHITE);
 		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblPrecio.setBounds(189, 40, 171, 30);
+		lblPrecio.setBounds(171, 40, 171, 30);
 		contentPane.add(lblPrecio);
 		
 		//CONFIGURACION IMAGEN BITCOIN
@@ -160,24 +166,34 @@ public class CotizacionesVista extends JFrame {
 		lblDoge.setBounds(116, 378, 46, 14);
 		contentPane.add(lblDoge);
 		
-		JLabel lblPrecioBtc = new JLabel("New label");
-		lblPrecioBtc.setBounds(227, 118, 100, 14);
+		lblPrecioBtc = new JLabel("New label");
+		lblPrecioBtc.setForeground(Color.WHITE);
+		lblPrecioBtc.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPrecioBtc.setBounds(189, 118, 138, 14);
 		contentPane.add(lblPrecioBtc);
 		
-		JLabel lblPrecioEth = new JLabel("New label");
-		lblPrecioEth.setBounds(227, 183, 100, 14);
+		lblPrecioEth = new JLabel("New label");
+		lblPrecioEth.setForeground(Color.WHITE);
+		lblPrecioEth.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPrecioEth.setBounds(189, 183, 138, 14);
 		contentPane.add(lblPrecioEth);
 		
-		JLabel lblPrecioUsdc = new JLabel("New label");
-		lblPrecioUsdc.setBounds(227, 248, 100, 14);
+		lblPrecioUsdc = new JLabel("New label");
+		lblPrecioUsdc.setForeground(Color.WHITE);
+		lblPrecioUsdc.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPrecioUsdc.setBounds(189, 248, 138, 14);
 		contentPane.add(lblPrecioUsdc);
 		
-		JLabel lblPrecioUsdt = new JLabel("New label");
-		lblPrecioUsdt.setBounds(227, 313, 100, 14);
+		lblPrecioUsdt = new JLabel("New label");
+		lblPrecioUsdt.setForeground(Color.WHITE);
+		lblPrecioUsdt.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPrecioUsdt.setBounds(189, 313, 138, 14);
 		contentPane.add(lblPrecioUsdt);
 		
-		JLabel lblPrecioDoge = new JLabel("New label");
-		lblPrecioDoge.setBounds(227, 378, 100, 14);
+		lblPrecioDoge = new JLabel("New label");
+		lblPrecioDoge.setForeground(Color.WHITE);
+		lblPrecioDoge.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPrecioDoge.setBounds(189, 378, 138, 14);
 		contentPane.add(lblPrecioDoge);
 		
 		btnComprarBtc = new JButton("COMPRAR");
@@ -235,9 +251,22 @@ public class CotizacionesVista extends JFrame {
 		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnCerrar.setBounds(415, 28, 89, 23);
 		contentPane.add(btnCerrar);
+		
+		btnStock = new JButton("Generar Stock");
+		btnStock.setBounds(354, 52, 150, 23);
+		btnStock.setFont(new Font("Tahoma", Font.BOLD, 11));
+		contentPane.add(btnStock);
 	}
 
 	//getter y setter
+	public void setPrecios(double btc, double eth, double usdc, double usdt, double doge) {
+		lblPrecioBtc.setText("$ "+ Double.toString(btc));
+		lblPrecioEth.setText("$ "+Double.toString(eth));
+		lblPrecioUsdc.setText("$ "+Double.toString(usdc));
+		lblPrecioUsdt.setText("$ "+Double.toString(usdt));
+		lblPrecioDoge.setText("$ "+Double.toString(doge));
+	}
+	
 	
 	public JButton getBtnVolver() {
 		return btnVolver;
