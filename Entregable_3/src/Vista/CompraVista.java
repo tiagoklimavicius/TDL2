@@ -68,6 +68,7 @@ public class CompraVista extends JFrame {
 		
 												
 		lblComprarCripto = new JLabel("");
+		lblComprarCripto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblComprarCripto.setForeground(Color.WHITE);
 		lblComprarCripto.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblComprarCripto.setBounds(80, 11, 207, 49);

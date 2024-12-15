@@ -54,7 +54,7 @@ public class BalanceControlador {
 			//para cada uno tengo que obtener su ImageIcon, Nombre y Precio
 			String imagen = modelo.obtenerImagen(activo);						//obtengo la ruta de donde esta la imagen
 			String nombre = modelo.obtenerNombre(activo);						//obtengo el nombre del activo
-			String precio = modelo.obtenerPrecio(activo);						//obtengo el monto que poseo de tal activo 
+			double precio = modelo.obtenerPrecio(activo);						//obtengo el monto que poseo de tal activo 
 			this.vista.llenarTabla(imagen, nombre, precio);						//agrego a la tabla este activo
 		}
 		

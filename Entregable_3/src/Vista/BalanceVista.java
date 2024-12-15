@@ -17,7 +17,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.JToggleButton;
 
 public class BalanceVista extends JFrame {
@@ -30,8 +32,6 @@ public class BalanceVista extends JFrame {
 	private JButton btnCerrar;
 	private JLabel lblBalance;
 	private JButton btnExportar;
-	private JButton btnMonto;
-	private JButton btnCripto;
 	private JButton btnTransacciones;
 	private JButton btnCotizaciones;
 	private JButton btnFondos;
@@ -101,30 +101,38 @@ public class BalanceVista extends JFrame {
 		contentPane.add(lblBalance);
 		
 		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.BOLD, 12));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {}, //vacio el inicio
-			new String[] { "Imagen", "Nombre", "Precio" } //nombres de las columnas"
+		table.setFont(new Font("Yu Gothic Medium", Font.BOLD, 15));
+		DefaultTableModel model = new DefaultTableModel(
+			    new Object[][] {}, // Vacío al inicio
+			    new String[] { "Imagen", "Nombre", "Monto" } // Nombres de las columnas
 			) {
-			
-			  public boolean isCellEditable(int row, int column) {
+			    private static final long serialVersionUID = 1L;
+
+			    @Override
+			    public boolean isCellEditable(int row, int column) {
 			        // Todas las celdas son no editables
 			        return false;
 			    }
-			/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
 
-			@Override
-			public Class<?> getColumnClass(int columnIndex){
-				//primera columna es de tipo ImageIcon
-				if(columnIndex == 0) {
-					return ImageIcon.class;
-				}
-				return String.class; //ya que las demas columnas son texto
-			}
-		});
+			    @Override
+			    public Class<?> getColumnClass(int columnIndex) {
+			        if (columnIndex == 0) {
+			            return ImageIcon.class; // Primera columna es de tipo ImageIcon
+			        } else if (columnIndex == 2) {
+			            return Double.class; // Precio debe ser Double para ordenar correctamente
+			        }
+			        return String.class; // Las demás columnas son texto
+			    }
+			};
+			
+		table.setModel(model);	
+		
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+		// Aplicar el renderizador solo a las columnas de Nombre y Precio
+		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Columna "Nombre"
+		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Columna "Precio"
 		
 		// Ajustar ancho de las columnas
         table.getColumnModel().getColumn(0).setPreferredWidth(20); // Imagen
@@ -132,29 +140,25 @@ public class BalanceVista extends JFrame {
         table.getColumnModel().getColumn(2).setPreferredWidth(80);  // Precio
         table.setRowHeight(60); // Altura para las imágenes
 
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        table.setRowSorter(sorter);	
+        
         // Agregar la tabla al JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(48, 129, 400, 200);
+        scrollPane.setBounds(25, 129, 461, 226);
         contentPane.add(scrollPane);
 		
 		btnExportar = new JButton("Exportar como CSV");
-		btnExportar.setBounds(170, 339, 141, 23);
+		btnExportar.setBounds(169, 366, 141, 23);
 		contentPane.add(btnExportar);
 		
-		btnMonto = new JButton("Monto");
-		btnMonto.setBounds(235, 19, 89, 23);
-		contentPane.add(btnMonto);
-		
-		btnCripto = new JButton("Cripto");
-		btnCripto.setBounds(136, 19, 89, 23);
-		contentPane.add(btnCripto);
-		
 		btnTransacciones = new JButton("Mis Operaciones");
-		btnTransacciones.setBounds(100, 373, 125, 50);
+		btnTransacciones.setBounds(100, 400, 125, 50);
 		contentPane.add(btnTransacciones);
 		
 		btnCotizaciones = new JButton("Cotizaciones");
-		btnCotizaciones.setBounds(257, 373, 125, 50);
+		btnCotizaciones.setBounds(255, 400, 125, 50);
 		contentPane.add(btnCotizaciones);
 		
 		btnFondos = new JButton("Ingresar Fondos");
@@ -165,12 +169,12 @@ public class BalanceVista extends JFrame {
 	
 	//getter y setter
 	
-	public void llenarTabla(String icon, String nombre, String precio) {
+	public void llenarTabla(String icon, String nombre, double precio) {
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
         modelo.addRow(new Object[]{
                 resizeImage(icon), // Imagen
                 nombre, // Nombre
-                precio // Precio
+                precio // Monto
         });
 	}
 	
@@ -200,14 +204,6 @@ public class BalanceVista extends JFrame {
 	
 	public JButton getBtnExportar() {
 		return btnExportar;
-	}
-	
-	public JButton getBtnMonto() {
-		return btnMonto;
-	}
-	
-	public JButton getBtnCripto() {
-		return btnCripto;
 	}
 	
 	public JButton getBtnTransacciones() {

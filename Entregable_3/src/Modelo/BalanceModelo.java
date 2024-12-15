@@ -47,11 +47,10 @@ public class BalanceModelo {
 		return nombre;
 	}
 
-	public String obtenerPrecio(Activo activo) {
+	public double obtenerPrecio(Activo activo) {
 		MonedaDAO monedaDAO = new MonedaDAOImpl();
 		Moneda moneda = monedaDAO.obtener(activo.getIDMoneda());
 		double precio = moneda.getValorDolar() * activo.getCantidad();
-		String monto = String.valueOf(precio);
-		return monto;
+		return precio;
 	}
 }
