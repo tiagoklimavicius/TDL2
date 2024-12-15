@@ -7,7 +7,6 @@ import Entidad.Usuario;
 public class LoginModelo {
 	
 	public Usuario verificarUsuario(String email, String password) {
-		boolean check = false;
 		UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 		Usuario usuario = usuarioDAO.obtener(email);
 		if(usuario !=null) {							//si el usuario es distinto de null

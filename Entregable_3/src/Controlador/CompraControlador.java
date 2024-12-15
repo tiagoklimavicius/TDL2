@@ -98,6 +98,8 @@ public class CompraControlador {
 				if (vista.obtenerItem() == null) {
 				    throw new IllegalArgumentException("Debe seleccionar una moneda fiat para pagar.");
 				}
+				
+				
 	
 				if( modelo.comprarCripto(monto, fiat, user ,moneda)) {
 					vista.mostrarMensaje("La compra fue realizada con éxito.");
