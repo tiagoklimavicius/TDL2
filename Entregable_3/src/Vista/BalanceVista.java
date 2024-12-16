@@ -77,14 +77,15 @@ public class BalanceVista extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		lblNombreUsuario = new JLabel("");   
-		lblNombreUsuario.setBounds(440, 11, 46, 14);
+		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombreUsuario.setBounds(414, 11, 90, 14);
 		lblNombreUsuario.setForeground(Color.WHITE);
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblNombreUsuario);
 		
 		btnCerrar = new JButton("Cerrar sesión");
 		btnCerrar.setBounds(415, 28, 89, 23);
-		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 8));
 		contentPane.add(btnCerrar);
 		
 		lblBalance = new JLabel("BALANCE ");
@@ -98,7 +99,7 @@ public class BalanceVista extends JFrame {
 		table.setFont(new Font("Yu Gothic Medium", Font.BOLD, 15));
 		DefaultTableModel model = new DefaultTableModel(
 			    new Object[][] {}, // Vacío al inicio
-			    new String[] { "Imagen", "Nombre", "Monto" } // Nombres de las columnas
+			    new String[] { "Imagen", "Nombre", "Monto ($USD)" } // Nombres de las columnas
 			) {
 			    private static final long serialVersionUID = 1L;
 
@@ -144,15 +145,15 @@ public class BalanceVista extends JFrame {
         contentPane.add(scrollPane);
 		
 		btnExportar = new JButton("Exportar como CSV");
-		btnExportar.setBounds(169, 366, 141, 23);
+		btnExportar.setBounds(160, 366, 200, 23);
 		contentPane.add(btnExportar);
 		
 		btnTransacciones = new JButton("Mis Operaciones");
-		btnTransacciones.setBounds(100, 400, 125, 50);
+		btnTransacciones.setBounds(113, 400, 139, 50);
 		contentPane.add(btnTransacciones);
 		
 		btnCotizaciones = new JButton("Cotizaciones");
-		btnCotizaciones.setBounds(255, 400, 125, 50);
+		btnCotizaciones.setBounds(271, 400, 139, 50);
 		contentPane.add(btnCotizaciones);
 		
 		btnFondos = new JButton("Ingresar Fondos");

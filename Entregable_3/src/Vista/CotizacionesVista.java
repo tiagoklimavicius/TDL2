@@ -242,13 +242,14 @@ public class CotizacionesVista extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		lblNombreUsuario = new JLabel("");   
+		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreUsuario.setForeground(Color.WHITE);
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombreUsuario.setBounds(440, 11, 46, 14);
+		lblNombreUsuario.setBounds(414, 11, 90, 14);
 		contentPane.add(lblNombreUsuario);
 		
 		btnCerrar = new JButton("Cerrar sesión");
-		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 8));
 		btnCerrar.setBounds(415, 28, 89, 23);
 		contentPane.add(btnCerrar);
 		
@@ -257,8 +258,14 @@ public class CotizacionesVista extends JFrame {
 		btnStock.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(btnStock);
 	}
+	
 
 	//getter y setter
+	public JButton getBtnStock() {
+		return btnStock;
+	}
+	
+	
 	public void setPrecios(double btc, double eth, double usdc, double usdt, double doge) {
 		lblPrecioBtc.setText("$ "+ Double.toString(btc));
 		lblPrecioEth.setText("$ "+Double.toString(eth));

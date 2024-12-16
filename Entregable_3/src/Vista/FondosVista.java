@@ -115,13 +115,14 @@ public class FondosVista extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		lblNombreUsuario = new JLabel("");   
+		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreUsuario.setForeground(Color.WHITE);
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombreUsuario.setBounds(440, 11, 46, 14);
+		lblNombreUsuario.setBounds(414, 11, 90, 14);
 		contentPane.add(lblNombreUsuario);
 		
 		btnCerrar = new JButton("Cerrar sesión");
-		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 8));
 		btnCerrar.setBounds(415, 28, 89, 23);
 		contentPane.add(btnCerrar);
 	}
@@ -130,10 +131,8 @@ public class FondosVista extends JFrame {
 	
 	public double getCantidad() {
 	    try {
-	        return Double.parseDouble(textNumero.getText());															//revisar que no se cierre la ventana de compra por este error
+	        return Double.parseDouble(textNumero.getText());															
 	    } catch (NumberFormatException e) {
-	        // Manejo de la excepción si el texto no es un número válido
-	    	JOptionPane.showMessageDialog(this, "El valor ingresado no es un número válido" ,"Error", JOptionPane.ERROR_MESSAGE);
 	        return 0;
 	    }
 	}

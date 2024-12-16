@@ -43,6 +43,7 @@ public class CompraControlador {
 		this.vista.setCriptoNombre(moneda.getNombre());		//seteo el nombre de la cripto
 		this.vista.setPrecio(moneda.getValorDolar());		//DEJARLO ASI O AL MISMO TIEMPO OBTENER EL VALOR ACTUALIZADO CADA 5 SEGUNDOS.
 		this.vista.setIconoCripto(moneda.getNombreIcono());
+		this.vista.setStock(moneda.getStock());
 		
 		
 		
@@ -53,7 +54,7 @@ public class CompraControlador {
 			this.vista.agregarItem(fiat);
 		}
 		
-		
+	
 		
 		//BOTON DE CANCELAR LA COMPRA
 		this.vista.getBtnCancelar().addActionListener(e -> {

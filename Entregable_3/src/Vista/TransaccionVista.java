@@ -72,7 +72,7 @@ public class TransaccionVista extends JFrame {
 		contentPane.add(scrollPane);
 		
 		txtArea = new JTextArea();
-		txtArea.setFont(new Font("Arial Black", Font.PLAIN, 10));
+		txtArea.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		txtArea.setEditable(false);
 		scrollPane.setViewportView(txtArea);
 		
@@ -92,13 +92,14 @@ public class TransaccionVista extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		lblNombreUsuario = new JLabel("");   
+		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreUsuario.setForeground(Color.WHITE);
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombreUsuario.setBounds(440, 11, 46, 14);
+		lblNombreUsuario.setBounds(414, 11, 90, 14);
 		contentPane.add(lblNombreUsuario);
 		
 		btnCerrar = new JButton("Cerrar sesión");
-		btnCerrar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 8));
 		btnCerrar.setBounds(415, 28, 89, 23);
 		contentPane.add(btnCerrar);
 		

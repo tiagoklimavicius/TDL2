@@ -48,7 +48,11 @@ public class CotizacionesControlador {
 		
 		
 		
-		
+		//BOTON DE GENERAR STOCK
+		this.vista.getBtnStock().addActionListener(e -> {
+			modelo.generarStock();
+			this.vista.mostrarMensaje("Stock generado exitosamente.");
+		});
 		
 		
 		this.vista.getBtnVolver().addActionListener(e -> {

@@ -70,6 +70,10 @@ public class FondosControlador {
 				if (vista.obtenerItem() == null) {
 				    throw new IllegalArgumentException("Debe seleccionar una moneda fiat para pagar.");
 				}
+				
+				if (vista.getCantidad() == 0) {
+				    throw new IllegalArgumentException("Debe ingresar un monto.");
+				}
 	
 				if( modelo.comprarFiat(monto, fiat, user)) {
 					vista.mostrarMensaje("Será rederigido a la aplicación del metodo de pago seleccionado");

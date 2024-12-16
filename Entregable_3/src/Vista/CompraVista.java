@@ -38,6 +38,7 @@ public class CompraVista extends JFrame {
 	private JLabel lblCriptoImagen;
 	private JLabel lblNombreUsuario;
 	private JButton btnCerrar;
+	private JLabel lblStock;
 
 	/**
 	 * Launch the application.
@@ -76,7 +77,7 @@ public class CompraVista extends JFrame {
 		lblComprarCripto.setHorizontalAlignment(SwingConstants.LEFT);
 		lblComprarCripto.setForeground(Color.WHITE);
 		lblComprarCripto.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblComprarCripto.setBounds(80, 11, 207, 49);
+		lblComprarCripto.setBounds(80, 11, 104, 49);
 		contentPane.add(lblComprarCripto);
 		
 										
@@ -153,18 +154,29 @@ public class CompraVista extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		lblNombreUsuario = new JLabel("");   
+		lblNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombreUsuario.setForeground(Color.WHITE);
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombreUsuario.setBounds(440, 11, 46, 14);
+		lblNombreUsuario.setBounds(414, 11, 90, 14);
 		contentPane.add(lblNombreUsuario);
 		
 		btnCerrar = new JButton("Cerrar sesión");
 		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 8));
 		btnCerrar.setBounds(415, 28, 89, 23);
 		contentPane.add(btnCerrar);
+		
+		lblStock = new JLabel("STOCK DISPONIBLE:");
+		lblStock.setForeground(Color.WHITE);
+		lblStock.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblStock.setBounds(10, 117, 379, 14);
+		contentPane.add(lblStock);
 	}
 	
 	//getter y setter
+	
+	public void setStock(double stock) {
+		lblStock.setText("STOCK DISPONIBLE: " + String.valueOf(stock));
+	}
 	
 	public void setNombreUsuario(String nombre) {
 		lblNombreUsuario.setText(nombre);

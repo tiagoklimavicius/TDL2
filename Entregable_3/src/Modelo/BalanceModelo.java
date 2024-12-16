@@ -69,7 +69,7 @@ public class BalanceModelo {
 		        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
 		        
 		        // Escribir los nombres de las columnas
-		        for (int i = 0; i < modelo.getColumnCount(); i++) {
+		        for (int i = 1; i < modelo.getColumnCount(); i++) {
 		            bw.write(modelo.getColumnName(i));
 		            if (i < modelo.getColumnCount() - 1) {
 		                bw.write(","); // Separador de columnas
@@ -82,7 +82,7 @@ public class BalanceModelo {
 		            for (int j = 0; j < modelo.getColumnCount(); j++) {
 		                Object valor = modelo.getValueAt(i, j);
 		                if (valor instanceof ImageIcon) {
-		                    bw.write("Imagen"); // Opcional: indicar que es una imagen
+		                	//imagen
 		                } else {
 		                    bw.write(valor.toString());
 		                }

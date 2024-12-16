@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,12 +30,11 @@ public class RegistroVista extends JFrame {
 	private JTextField textNombre;
 	private JTextField textApellido;
 	private JTextField textEmail;
-	private JTextField textContra;
-	private JTextField textContra2;
+	private JPasswordField textContra;
+	private JPasswordField textContra2;
 	private JButton btnConfirmar;
 	private JLabel lblEsUsuario;
 	private JCheckBox chckbxTyC;
-	private JLabel lblAceptarTyC;
 	private JButton btnIniciar;
 
 	/**
@@ -71,87 +71,92 @@ public class RegistroVista extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JLabel lblSignUp = new JLabel("REGISTRO");
-		lblSignUp.setBounds(0, 11, 514, 38);
-		lblSignUp.setFont(new Font("Yu Gothic Medium", Font.BOLD, 24));
+		lblSignUp.setBounds(0, 11, 514, 52);
+		lblSignUp.setFont(new Font("Yu Gothic Medium", Font.BOLD, 30));
 		lblSignUp.setForeground(Color.WHITE);
 		lblSignUp.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblSignUp);
 		
 		JLabel lblNombre = new JLabel("Nombres: ");
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNombre.setForeground(Color.WHITE);
-		lblNombre.setBounds(70, 135, 71, 14);
+		lblNombre.setBounds(35, 120, 95, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblApellido = new JLabel("Apellidos: ");
+		lblApellido.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblApellido.setForeground(Color.WHITE);
-		lblApellido.setBounds(70, 160, 71, 14);
+		lblApellido.setBounds(35, 160, 95, 14);
 		contentPane.add(lblApellido);
 		
 		textNombre = new JTextField();
-		textNombre.setBounds(169, 132, 205, 20);
+		textNombre.setBounds(169, 115, 210, 30);
 		contentPane.add(textNombre);
 		textNombre.setColumns(10);
 		
 		textApellido = new JTextField();
-		textApellido.setBounds(169, 157, 205, 20);
+		textApellido.setBounds(169, 155, 210, 30);
 		contentPane.add(textApellido);
 		textApellido.setColumns(10);
 		
 		JLabel lblInfo = new JLabel("Ingrese los datos a continuación:");
-		lblInfo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblInfo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblInfo.setForeground(Color.WHITE);
-		lblInfo.setBounds(10, 60, 213, 14);
+		lblInfo.setBounds(35, 74, 275, 30);
 		contentPane.add(lblInfo);
 		
 		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEmail.setForeground(Color.WHITE);
-		lblEmail.setBounds(70, 185, 71, 14);
+		lblEmail.setBounds(35, 200, 95, 14);
 		contentPane.add(lblEmail);
 		
 		JLabel lblContraseña = new JLabel("Contraseña:");
+		lblContraseña.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblContraseña.setForeground(Color.WHITE);
-		lblContraseña.setBounds(70, 210, 71, 14);
+		lblContraseña.setBounds(35, 240, 95, 14);
 		contentPane.add(lblContraseña);
 		
 		textEmail = new JTextField();
-		textEmail.setBounds(169, 182, 205, 20);
+		textEmail.setBounds(169, 195, 210, 30);
 		contentPane.add(textEmail);
 		textEmail.setColumns(10);
 		
-		textContra = new JTextField();
-		textContra.setBounds(169, 207, 205, 20);
+		textContra = new JPasswordField();
+		textContra.setBounds(169, 235, 210, 30);
 		contentPane.add(textContra);
 		textContra.setColumns(10);
 		
 		JLabel lblConfirmar = new JLabel("Confirmar");
+		lblConfirmar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblConfirmar.setForeground(Color.WHITE);
-		lblConfirmar.setBounds(70, 235, 71, 14);
+		lblConfirmar.setBounds(35, 280, 95, 14);
 		contentPane.add(lblConfirmar);
 		
 		JLabel lblContraseña2 = new JLabel("contraseña:");
+		lblContraseña2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblContraseña2.setForeground(Color.WHITE);
-		lblContraseña2.setBounds(70, 247, 71, 14);
+		lblContraseña2.setBounds(35, 292, 95, 14);
 		contentPane.add(lblContraseña2);
 		
-		textContra2 = new JTextField();
-		textContra2.setBounds(169, 232, 205, 20);
+		textContra2 = new JPasswordField();
+		textContra2.setBounds(169, 275, 210, 30);
 		contentPane.add(textContra2);
 		textContra2.setColumns(10);
 		
 		chckbxTyC = new JCheckBox("Acepto terminos y condiciones");
-		chckbxTyC.setFont(new Font("Tahoma", Font.BOLD, 11));
-		chckbxTyC.setBounds(169, 259, 205, 23);
+		chckbxTyC.setForeground(Color.WHITE);
+		chckbxTyC.setBackground(Color.DARK_GRAY);
+		chckbxTyC.setFont(new Font("Tahoma", Font.BOLD, 15));
+		chckbxTyC.setBounds(169, 323, 275, 23);
 	//	chckbxTyC.addActionListener(this);
 		contentPane.add(chckbxTyC);
 		
-		lblAceptarTyC = new JLabel("");
-		lblAceptarTyC.setForeground(Color.RED);
-		lblAceptarTyC.setBounds(116, 310, 205, 14);
-		contentPane.add(lblAceptarTyC);
-		
 		btnConfirmar = new JButton("CONFIRMAR");
+		btnConfirmar.setForeground(Color.WHITE);
+		btnConfirmar.setBackground(Color.DARK_GRAY);
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnConfirmar.setBounds(153, 355, 205, 23);
+		btnConfirmar.setBounds(180, 375, 147, 31);
 	//	btnConfirmar.addActionListener(this);
 		contentPane.add(btnConfirmar);
 		
@@ -188,11 +193,15 @@ public class RegistroVista extends JFrame {
 	}
 	
 	public String getContraseña() {
-		return textContra.getText();
+		char[] passwordArray = textContra.getPassword();
+		String contraseña = new String(passwordArray);
+		return contraseña;
 	}
 	
 	public String getContraseña2() {
-		return textContra2.getText();
+		char[] passwordArray = textContra2.getPassword();
+		String contraseña2 = new String(passwordArray);
+		return contraseña2;
 	}
 	
 	public JButton getBtnConfirmar() {

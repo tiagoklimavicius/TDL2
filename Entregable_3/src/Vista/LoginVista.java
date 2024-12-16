@@ -70,37 +70,41 @@ public class LoginVista extends JFrame{
 		JLabel lblLogin = new JLabel("INICIAR SESIÓN");
 		lblLogin.setForeground(Color.WHITE);
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setFont(new Font("Yu Gothic Medium", Font.BOLD, 24));
-		lblLogin.setBounds(0, 0, 514, 65);
+		lblLogin.setFont(new Font("Yu Gothic Medium", Font.BOLD, 30));
+		lblLogin.setBounds(0, 24, 514, 65);
 		contentPane.add(lblLogin);
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(Color.WHITE);
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEmail.setBackground(Color.WHITE);
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmail.setBounds(37, 73, 72, 31);
+		lblEmail.setBounds(37, 130, 72, 31);
 		contentPane.add(lblEmail);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(157, 76, 204, 28);
+		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtEmail.setBounds(157, 119, 221, 39);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
 		JLabel lblContraseña = new JLabel("Contraseña:");
 		lblContraseña.setForeground(Color.WHITE);
-		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblContraseña.setBounds(34, 122, 85, 39);
+		lblContraseña.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblContraseña.setBounds(28, 165, 99, 39);
 		contentPane.add(lblContraseña);
 		
 		txtContraseña = new JPasswordField();
+		txtContraseña.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtContraseña.setColumns(10);
-		txtContraseña.setBounds(157, 129, 204, 28);
+		txtContraseña.setBounds(157, 170, 221, 39);
 		contentPane.add(txtContraseña);
 		
 		btnIngresar = new JButton("INGRESAR");
-		btnIngresar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnIngresar.setBounds(177, 212, 130, 23);
+		btnIngresar.setForeground(Color.WHITE);
+		btnIngresar.setBackground(Color.DARK_GRAY);
+		btnIngresar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnIngresar.setBounds(177, 250, 147, 31);
 		contentPane.add(btnIngresar);
 		
 		btnRegistrarse = new JButton("REGISTRARSE");

@@ -1,5 +1,8 @@
 package Modelo;
 
+import java.util.List;
+import java.util.Random;
+
 import DAO.MonedaDAOImpl;
 import DAO.PersonaDAOImpl;
 import Entidad.Moneda;
@@ -19,4 +22,17 @@ public class CotizacionesModelo {
 		Moneda moneda = monedaDAO.obtener(nomenclatura);
 		return moneda;
 	}
-}
+	
+	public void generarStock() {
+			MonedaDAO monedaDAO = new MonedaDAOImpl();
+			List<Moneda> monedas = monedaDAO.listar(); // Recupera todas las monedas
+	        Random random = new Random();
+	        for (Moneda moneda : monedas) {
+	        	if(moneda.getTipo().equals("C")) {
+	        		double stockAleatorio = 10 + (5000 - 10) * random.nextDouble(); // Genera stock aleatorio           
+	        		moneda.setStock(moneda.getStock() + stockAleatorio); // Asigna el stock aleatorio a la moneda
+	        		monedaDAO.actualizar(moneda); // Actualiza la moneda en la base de datos
+	        	}
+	        }
+	    }
+	}

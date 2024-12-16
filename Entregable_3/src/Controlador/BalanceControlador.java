@@ -1,5 +1,6 @@
 package Controlador;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import Entidad.*;
@@ -78,7 +79,8 @@ public class BalanceControlador {
 		//asignar boton de exportar por csv
 		
 		this.vista.getBtnExportar().addActionListener(e -> {								//esto exporta los datos a una tabla nombrada con el email del usuario y se almacena en el directorio que esta el proyecto
-			if(modelo.exportarCSV("tabla_"+user.getEmail()+".csv", vista.getTabla())) {
+			String nombreArchivo = Paths.get(System.getProperty("user.home"), "Desktop", "tabla_"+user.getEmail()+".csv").toString();
+			if(modelo.exportarCSV(nombreArchivo, vista.getTabla())) {
 				vista.mostrarMensaje("Datos exportados exitosamente a tabla_"+user.getEmail()+".csv");
 			}
 			else {

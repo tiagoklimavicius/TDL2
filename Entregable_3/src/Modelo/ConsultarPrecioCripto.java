@@ -21,7 +21,7 @@ public class ConsultarPrecioCripto extends Thread {
         while (continuar) {
             consultarPrecios(); // Ejecutar la consulta
             try {
-                Thread.sleep(30000); // Esperar 5 segundos entre cada consulta
+                Thread.sleep(30000); // Esperar 30 segundos entre cada consulta
             } catch (InterruptedException e) {
                 System.out.println("Hilo interrumpido.");
                 detener(); // Detener si el hilo se interrumpe
@@ -61,31 +61,26 @@ public class ConsultarPrecioCripto extends Thread {
         //para BITCOIN
         moneda = monedaDAO.obtener("BTC");
         moneda.setValorDolar(json.getJSONObject("bitcoin").getDouble("usd"));
-        System.out.println(moneda.getValorDolar());
         monedaDAO.actualizar(moneda);
         
         //para ETHEREUM
         moneda = monedaDAO.obtener("ETH");
         moneda.setValorDolar(json.getJSONObject("ethereum").getDouble("usd"));
-        System.out.println(moneda.getValorDolar());
         monedaDAO.actualizar(moneda);
         
         //para USDC
         moneda = monedaDAO.obtener("USDC");
         moneda.setValorDolar(json.getJSONObject("usd-coin").getDouble("usd"));
-        System.out.println(moneda.getValorDolar());
         monedaDAO.actualizar(moneda);
         
         //para USDT
         moneda = monedaDAO.obtener("USDT");
         moneda.setValorDolar(json.getJSONObject("tether").getDouble("usd"));
-        System.out.println(moneda.getValorDolar());
         monedaDAO.actualizar(moneda);
         
         //para DOGE
         moneda = monedaDAO.obtener("DOGE");
         moneda.setValorDolar(json.getJSONObject("dogecoin").getDouble("usd"));
-        System.out.println(moneda.getValorDolar());
         monedaDAO.actualizar(moneda);
     }
 
