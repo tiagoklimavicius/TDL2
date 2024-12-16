@@ -33,6 +33,7 @@ public class LoginVista extends JFrame{
 	private JButton btnIngresar;
 	private JButton btnRegistrarse;
 	private JLabel lblAun;
+	private JButton btnIniciar;
 
 	/**
 	 * Launch the application.
@@ -120,7 +121,17 @@ public class LoginVista extends JFrame{
 		lblAun.setBounds(105, 429, 168, 14);
 		contentPane.add(lblAun);
 		
+		btnIniciar = new JButton("Iniciar");
+		btnIniciar.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		btnIniciar.setBounds(443, 11, 61, 23);
+		contentPane.add(btnIniciar);
+		
 	}
+	
+	public JButton getBtnIniciar() {
+		return btnIniciar;
+	}
+	
 	// Getter y Setter para btnIngresar
 	public JButton getBtnIngresar() {
 	    return btnIngresar;

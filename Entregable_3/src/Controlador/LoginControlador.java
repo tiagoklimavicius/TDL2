@@ -47,6 +47,12 @@ public class LoginControlador {
 			vista.dispose();			//se cierra la ventana de iniciar sesion
 		
 		});
+		
+		//BOTON INSTANCIAR MONEDAS
+		this.vista.getBtnIniciar().addActionListener(e-> {
+			modelo.iniciarMonedas();
+			vista.mostrarMensaje("Monedas iniciadas correctamente");
+		});
 	}
 	
 	
